@@ -1,10 +1,12 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, useRouter } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/location/')({
     component: RouteComponent,
 })
 
 function RouteComponent() {
+    const router = useRouter();
+
     return (
         <div className='container mx-auto p-8 flex flex-col gap-16'>
             <div className='max-w-[669px] self-center flex flex-col items-center gap-4'>
@@ -49,7 +51,10 @@ function RouteComponent() {
                             Delivery
                         </div>
                     </div>
-                    <button className='bg-[#007C3E] h-[48px] p-3 rounded-lg flex justify-center items-center text-white font-medium'>
+                    <button
+                        className='bg-[#007C3E] h-[48px] p-3 rounded-lg flex justify-center items-center text-white font-medium cursor-pointer hover:bg-[#00934a]'
+                        onClick={() => router.navigate({ to: '/location/coventry' })}
+                    >
                         Order from Coventry
                     </button>
                 </div>
@@ -85,7 +90,10 @@ function RouteComponent() {
                             Delivery
                         </div>
                     </div>
-                    <button className='bg-[#007C3E] h-[48px] p-3 rounded-lg flex justify-center items-center text-white font-medium'>
+                    <button
+                        className='bg-[#007C3E] h-[48px] p-3 rounded-lg flex justify-center items-center text-white font-medium cursor-pointer hover:bg-[#00934a]'
+                        onClick={() => router.navigate({ to: '/location/jewellery-quarter' })}
+                    >
                         Order from Jewellery Quarter
                     </button>
                 </div>
@@ -121,7 +129,10 @@ function RouteComponent() {
                             Delivery
                         </div>
                     </div>
-                    <button className='bg-[#007C3E] h-[48px] p-3 rounded-lg flex justify-center items-center text-white font-medium'>
+                    <button
+                        className='bg-[#007C3E] h-[48px] p-3 rounded-lg flex justify-center items-center text-white font-medium cursor-pointer hover:bg-[#00934a]'
+                        onClick={() => router.navigate({ to: '/location/broadway-plaza' })}
+                    >
                         Order from Broadway Plaza
                     </button>
                 </div>
@@ -157,8 +168,11 @@ function RouteComponent() {
                             Delivery
                         </div>
                     </div>
-                    <button className='bg-[#007C3E] h-[48px] p-3 rounded-lg flex justify-center items-center text-white font-medium'>
-                        Order from Coventry
+                    <button
+                        className='bg-[#007C3E] h-[48px] p-3 rounded-lg flex justify-center items-center text-white font-medium cursor-pointer hover:bg-[#00934a]'
+                        onClick={() => router.navigate({ to: '/location/west-orchards' })}
+                    >
+                        Order from West Orchards
                     </button>
                 </div>
             </div>

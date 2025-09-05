@@ -10,18 +10,13 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as MenuIndexRouteImport } from './routes/menu/index'
 import { Route as LocationIndexRouteImport } from './routes/location/index'
 import { Route as CartIndexRouteImport } from './routes/cart/index'
+import { Route as LocationLocationIdIndexRouteImport } from './routes/location/$locationId/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MenuIndexRoute = MenuIndexRouteImport.update({
-  id: '/menu/',
-  path: '/menu/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LocationIndexRoute = LocationIndexRouteImport.update({
@@ -34,39 +29,44 @@ const CartIndexRoute = CartIndexRouteImport.update({
   path: '/cart/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LocationLocationIdIndexRoute = LocationLocationIdIndexRouteImport.update({
+  id: '/location/$locationId/',
+  path: '/location/$locationId/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/cart': typeof CartIndexRoute
   '/location': typeof LocationIndexRoute
-  '/menu': typeof MenuIndexRoute
+  '/location/$locationId': typeof LocationLocationIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/cart': typeof CartIndexRoute
   '/location': typeof LocationIndexRoute
-  '/menu': typeof MenuIndexRoute
+  '/location/$locationId': typeof LocationLocationIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/cart/': typeof CartIndexRoute
   '/location/': typeof LocationIndexRoute
-  '/menu/': typeof MenuIndexRoute
+  '/location/$locationId/': typeof LocationLocationIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/cart' | '/location' | '/menu'
+  fullPaths: '/' | '/cart' | '/location' | '/location/$locationId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/cart' | '/location' | '/menu'
-  id: '__root__' | '/' | '/cart/' | '/location/' | '/menu/'
+  to: '/' | '/cart' | '/location' | '/location/$locationId'
+  id: '__root__' | '/' | '/cart/' | '/location/' | '/location/$locationId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CartIndexRoute: typeof CartIndexRoute
   LocationIndexRoute: typeof LocationIndexRoute
-  MenuIndexRoute: typeof MenuIndexRoute
+  LocationLocationIdIndexRoute: typeof LocationLocationIdIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -76,13 +76,6 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/menu/': {
-      id: '/menu/'
-      path: '/menu'
-      fullPath: '/menu'
-      preLoaderRoute: typeof MenuIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/location/': {
@@ -99,6 +92,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CartIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/location/$locationId/': {
+      id: '/location/$locationId/'
+      path: '/location/$locationId'
+      fullPath: '/location/$locationId'
+      preLoaderRoute: typeof LocationLocationIdIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -106,7 +106,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CartIndexRoute: CartIndexRoute,
   LocationIndexRoute: LocationIndexRoute,
-  MenuIndexRoute: MenuIndexRoute,
+  LocationLocationIdIndexRoute: LocationLocationIdIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
