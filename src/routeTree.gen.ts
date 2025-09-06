@@ -10,18 +10,12 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as LocationIndexRouteImport } from './routes/location/index'
 import { Route as CartIndexRouteImport } from './routes/cart/index'
-import { Route as LocationLocationIdIndexRouteImport } from './routes/location/$locationId/index'
+import { Route as LocationIdIndexRouteImport } from './routes/$locationId/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LocationIndexRoute = LocationIndexRouteImport.update({
-  id: '/location/',
-  path: '/location/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CartIndexRoute = CartIndexRouteImport.update({
@@ -29,44 +23,40 @@ const CartIndexRoute = CartIndexRouteImport.update({
   path: '/cart/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LocationLocationIdIndexRoute = LocationLocationIdIndexRouteImport.update({
-  id: '/location/$locationId/',
-  path: '/location/$locationId/',
+const LocationIdIndexRoute = LocationIdIndexRouteImport.update({
+  id: '/$locationId/',
+  path: '/$locationId/',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/$locationId': typeof LocationIdIndexRoute
   '/cart': typeof CartIndexRoute
-  '/location': typeof LocationIndexRoute
-  '/location/$locationId': typeof LocationLocationIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/$locationId': typeof LocationIdIndexRoute
   '/cart': typeof CartIndexRoute
-  '/location': typeof LocationIndexRoute
-  '/location/$locationId': typeof LocationLocationIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/$locationId/': typeof LocationIdIndexRoute
   '/cart/': typeof CartIndexRoute
-  '/location/': typeof LocationIndexRoute
-  '/location/$locationId/': typeof LocationLocationIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/cart' | '/location' | '/location/$locationId'
+  fullPaths: '/' | '/$locationId' | '/cart'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/cart' | '/location' | '/location/$locationId'
-  id: '__root__' | '/' | '/cart/' | '/location/' | '/location/$locationId/'
+  to: '/' | '/$locationId' | '/cart'
+  id: '__root__' | '/' | '/$locationId/' | '/cart/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  LocationIdIndexRoute: typeof LocationIdIndexRoute
   CartIndexRoute: typeof CartIndexRoute
-  LocationIndexRoute: typeof LocationIndexRoute
-  LocationLocationIdIndexRoute: typeof LocationLocationIdIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -78,13 +68,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/location/': {
-      id: '/location/'
-      path: '/location'
-      fullPath: '/location'
-      preLoaderRoute: typeof LocationIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/cart/': {
       id: '/cart/'
       path: '/cart'
@@ -92,11 +75,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CartIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/location/$locationId/': {
-      id: '/location/$locationId/'
-      path: '/location/$locationId'
-      fullPath: '/location/$locationId'
-      preLoaderRoute: typeof LocationLocationIdIndexRouteImport
+    '/$locationId/': {
+      id: '/$locationId/'
+      path: '/$locationId'
+      fullPath: '/$locationId'
+      preLoaderRoute: typeof LocationIdIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -104,9 +87,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  LocationIdIndexRoute: LocationIdIndexRoute,
   CartIndexRoute: CartIndexRoute,
-  LocationIndexRoute: LocationIndexRoute,
-  LocationLocationIdIndexRoute: LocationLocationIdIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

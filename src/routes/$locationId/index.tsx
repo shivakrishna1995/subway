@@ -3,7 +3,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import Categories from '@/data.json';
 import Product from '@/components/Product';
 
-export const Route = createFileRoute('/location/$locationId/')({
+export const Route = createFileRoute('/$locationId/')({
     component: RouteComponent,
 })
 

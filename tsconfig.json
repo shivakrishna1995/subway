@@ -1,5 +1,5 @@
 {
-  "include": ["**/*.ts", "**/*.tsx", "src/routes/location"],
+  "include": ["**/*.ts", "**/*.tsx", "src/routes/location", "src/routes/$locationId"],
   "compilerOptions": {
     "target": "ES2022",
     "jsx": "react-jsx",
