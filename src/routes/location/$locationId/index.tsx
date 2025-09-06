@@ -35,6 +35,9 @@ function RouteComponent() {
                                                 <div className='text-[#111827] font-semibold'>
                                                     {product.productName}
                                                 </div>
+                                                <div className='text-sm text-[#4B5563]'>
+                                                    from <span className='text-black font-semibold'>£{product.price.toFixed(2)}</span>
+                                                </div>
                                                 <div className='text-xs text-[#4B5563]'>
                                                     {product.description}
                                                 </div>
