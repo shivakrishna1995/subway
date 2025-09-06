@@ -29,7 +29,7 @@ function RouteComponent() {
                                 </div>
                                 <div className='flex flex-row flex-wrap gap-6'>
                                     {subCategory.products.map((product) => (
-                                        <div className='w-[294px] shadow bg-white flex flex-col overflow-hidden rounded-lg'>
+                                        <div className='w-[294px] shadow bg-white flex flex-col overflow-hidden rounded-lg relative cursor-pointer hover:shadow-lg'>
                                             <img src={product.imageUrl} alt={product.productName} className='w-full object-contain' />
                                             <div className='p-4 flex flex-col gap-2'>
                                                 <div className='text-[#111827] font-semibold'>
@@ -38,12 +38,11 @@ function RouteComponent() {
                                                 <div className='text-xs text-[#4B5563]'>
                                                     {product.description}
                                                 </div>
-                                                <button
-                                                    className='mt-[3px] bg-[#007C3E] h-[36px] p-3 rounded-lg flex justify-center items-center text-white font-medium cursor-pointer hover:bg-[#00934a] text-sm'
-                                                >
-                                                    Customize
-                                                </button>
                                             </div>
+                                            <svg className='absolute top-[14px] right-[14px]' width="35px" height="35px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <circle opacity="0.5" cx="12" cy="12" r="10" stroke="#1C274C" stroke-width="1.5" />
+                                                <path d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" />
+                                            </svg>
                                         </div>
                                     ))}
                                 </div>
