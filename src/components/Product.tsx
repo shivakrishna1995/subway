@@ -10,7 +10,7 @@ const Product = ({ productName, price, description, imageUrl }: ProductProps) =>
     return (
         <Dialog>
             <DialogTrigger>
-                <div className='w-[294px] shadow bg-white flex flex-col overflow-hidden rounded-lg relative cursor-pointer hover:shadow-lg'>
+                <div className='w-full shadow bg-white flex flex-col overflow-hidden rounded-lg relative cursor-pointer hover:shadow-lg'>
                     <img src={imageUrl} alt={productName} className='w-full object-contain' />
                     <div className='p-4 flex flex-col gap-2 items-start'>
                         <div className='text-[#111827] font-semibold'>

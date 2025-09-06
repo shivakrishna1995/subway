@@ -8,9 +8,9 @@ export const Route = createFileRoute('/location/$locationId/')({
 })
 
 function RouteComponent() {
-    return <div className='flex flex-col mt-2'>
+    return <div className='flex flex-col mt-2 overflow-x-hidden'>
         <Tabs defaultValue={Categories[0].categoryId.toString()}>
-            <div className='bg-white h-[63px] border-b-[1px] border-solid border-[#E5E7EB] flex flex-row items-center'>
+            <div className='bg-white h-[63px] border-b-[1px] border-solid border-[#E5E7EB] flex flex-row items-center overflow-auto'>
                 <div className='container mx-auto px-4'>
                     <TabsList className='flex gap-8'>
                         {Categories.map((category) => (
@@ -28,15 +28,17 @@ function RouteComponent() {
                                 <div className='text-[#111827] font-bold text-2xl'>
                                     {subCategory.subCategorieName}
                                 </div>
-                                <div className='flex flex-row flex-wrap gap-6'>
+                                <div className='flex flex-col md:flex-row flex-wrap gap-6'>
                                     {subCategory.products.map((product, index) => (
-                                        <Product
-                                            key={index}
-                                            productName={product.productName}
-                                            price={product.price}
-                                            description={product.description}
-                                            imageUrl={product.imageUrl}
-                                        />
+                                        <div key={index} className='w-full md:w-[294px]'>
+                                            <Product
+                                                key={index}
+                                                productName={product.productName}
+                                                price={product.price}
+                                                description={product.description}
+                                                imageUrl={product.imageUrl}
+                                            />
+                                        </div>
                                     ))}
                                 </div>
                             </div>
