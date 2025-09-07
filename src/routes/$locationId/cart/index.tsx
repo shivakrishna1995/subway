@@ -1,13 +1,17 @@
+import { useCartStore } from '@/store/cart';
 import { getCartPrices } from '@/util/price';
 import { createFileRoute } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
+import Data from '@/dataV2.json';
 
 export const Route = createFileRoute('/$locationId/cart/')({
   component: RouteComponent,
 })
 
 function RouteComponent() {
-  const [deliveryMethod, setDeliveryMethod] = useState<string | undefined>()
+  const [deliveryMethod, setDeliveryMethod] = useState<string | undefined>();
+
+  const { items, removeItem } = useCartStore();
 
   useEffect(() => {
     const prices = getCartPrices();
@@ -42,7 +46,7 @@ function RouteComponent() {
       <div className='flex-1 bg-white p-6 flex flex-col gap-10'>
         <div className='flex justify-between items-center'>
           <div className='text-[#111827] font-semibold text-xl'>
-            Your Items (3)
+            Your Items ({items.length})
           </div>
           <div className='flex items-center gap-1 cursor-pointer'>
             <svg width="13" height="15" viewBox="0 0 13 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -60,52 +64,69 @@ function RouteComponent() {
             </div>
           </div>
         </div>
-        <div className='p-[17px] gap-4 flex flex-col md:flex-row'>
-          <img className='w-[80px] h-[80px]' />
-          <div className='flex flex-col gap-3 flex-1'>
-            <div className='flex justify-between'>
-              <div className='text-[#111827] font-semibold'>
-                Italian B.M.T.
-              </div>
-              <div className='text-[#111827] font-semibold'>
-                $12.99
-              </div>
-            </div>
-            <div className='text-[#4B5563] text-sm'>
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-            </div>
-            <div className='flex justify-between'>
-              <div className='flex gap-3 items-center'>
-                <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 24 24" fill="none" className="cursor-pointer"
-                >
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM15.75 12C15.75 12.4142 15.4142 12.75 15 12.75H9C8.58579 12.75 8.25 12.4142 8.25 12C8.25 11.5858 8.58579 11.25 9 11.25H15C15.4142 11.25 15.75 11.5858 15.75 12Z" fill="#1C274C" />
-                </svg>
-                <div className="text-[#1C274C] font-semibold text-lg">
-                  1
+        {items.map((item) => {
+          const productDetails = Data.subs.products.find(p => p.productName === item.item.productName);
+          return (
+            <div className='p-[17px] gap-4 flex flex-col md:flex-row' key={item.id}>
+              <img className='w-[80px] h-[80px] object-cover' src={productDetails?.imageUrl} />
+              <div className='flex flex-col gap-3 flex-1'>
+                <div className='flex justify-between'>
+                  <div className='text-[#111827] font-semibold'>
+                    {productDetails?.productName}
+                  </div>
+                  <div className='text-[#111827] font-semibold'>
+                    ${((productDetails?.price || 0) * (item?.qty || 0))?.toFixed(2)}
+                  </div>
                 </div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 24 24" fill="none" className="cursor-pointer"
-                >
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22ZM12.75 9C12.75 8.58579 12.4142 8.25 12 8.25C11.5858 8.25 11.25 8.58579 11.25 9L11.25 11.25H9C8.58579 11.25 8.25 11.5858 8.25 12C8.25 12.4142 8.58579 12.75 9 12.75H11.25V15C11.25 15.4142 11.5858 15.75 12 15.75C12.4142 15.75 12.75 15.4142 12.75 15L12.75 12.75H15C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25H12.75V9Z" fill="#1C274C" />
-                </svg>
-              </div>
-              <div className='flex items-center gap-1 cursor-pointer'>
-                <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <g clip-path="url(#clip0_14_1430)">
-                    <path d="M4.66562 1.23398L4.46875 1.625H1.84375C1.35977 1.625 0.96875 2.01602 0.96875 2.5C0.96875 2.98398 1.35977 3.375 1.84375 3.375H12.3438C12.8277 3.375 13.2188 2.98398 13.2188 2.5C13.2188 2.01602 12.8277 1.625 12.3438 1.625H9.71875L9.52187 1.23398C9.37422 0.935938 9.0707 0.75 8.73984 0.75H5.44766C5.1168 0.75 4.81328 0.935938 4.66562 1.23398ZM12.3438 4.25H1.84375L2.42344 13.5195C2.46719 14.2113 3.04141 14.75 3.7332 14.75H10.4543C11.1461 14.75 11.7203 14.2113 11.7641 13.5195L12.3438 4.25Z" fill="#EF4444" />
-                  </g>
-                  <defs>
-                    <clipPath id="clip0_14_1430">
-                      <path d="M0.96875 0.75H13.2188V14.75H0.96875V0.75Z" fill="white" />
-                    </clipPath>
-                  </defs>
-                </svg>
-                <div className='text-[#EF4444] tex-sm'>
-                  Remove
+                <div className='text-[#4B5563] text-sm'>
+                  <ul>
+                    {item.item.type && <li className='text-sm'>Type: {item.item.type}</li>}
+                    {item.item.bread && <li className='text-sm'>Type: {item.item.bread}</li>}
+                    {item.item.cheese && <li className='text-sm'>Cheese: {item.item.cheese}</li>}
+                    {item.item.doubleCheese && <li className='text-sm'>Double Cheese: {item.item.doubleCheese}</li>}
+                    {item.item.doubleMeat && <li className='text-sm'>Double Meat: {item.item.doubleMeat}</li>}
+                    {item.item.toasted && <li className='text-sm'>Toasted: {item.item.toasted}</li>}
+                    {item.item.salad && <li className='text-sm'>Salad: {item.item.salad.join(', ')}</li>}
+                    {item.item.sauces && <li className='text-sm'>Sauce: {item.item.sauces.join(', ')}</li>}
+                    {item.item.mealDeal && <li className='text-sm'>Meal: {item.item.mealDeal}</li>}
+                    {item.item.sides && <li className='text-sm'>Sides: {item.item.sides.join(', ')}</li>}
+                    {item.item.drinks && <li className='text-sm'>Drinks: {item.item.drinks.join(', ')}</li>}
+                  </ul>
+                </div>
+                <div className='flex justify-between'>
+                  <div className='flex gap-3 items-center'>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 24 24" fill="none" className="cursor-pointer"
+                    >
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM15.75 12C15.75 12.4142 15.4142 12.75 15 12.75H9C8.58579 12.75 8.25 12.4142 8.25 12C8.25 11.5858 8.58579 11.25 9 11.25H15C15.4142 11.25 15.75 11.5858 15.75 12Z" fill="#1C274C" />
+                    </svg>
+                    <div className="text-[#1C274C] font-semibold text-lg">
+                      {item.qty}
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 24 24" fill="none" className="cursor-pointer"
+                    >
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22ZM12.75 9C12.75 8.58579 12.4142 8.25 12 8.25C11.5858 8.25 11.25 8.58579 11.25 9L11.25 11.25H9C8.58579 11.25 8.25 11.5858 8.25 12C8.25 12.4142 8.58579 12.75 9 12.75H11.25V15C11.25 15.4142 11.5858 15.75 12 15.75C12.4142 15.75 12.75 15.4142 12.75 15L12.75 12.75H15C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25H12.75V9Z" fill="#1C274C" />
+                    </svg>
+                  </div>
+                  <div className='flex items-center gap-1 cursor-pointer'>
+                    <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <g clip-path="url(#clip0_14_1430)">
+                        <path d="M4.66562 1.23398L4.46875 1.625H1.84375C1.35977 1.625 0.96875 2.01602 0.96875 2.5C0.96875 2.98398 1.35977 3.375 1.84375 3.375H12.3438C12.8277 3.375 13.2188 2.98398 13.2188 2.5C13.2188 2.01602 12.8277 1.625 12.3438 1.625H9.71875L9.52187 1.23398C9.37422 0.935938 9.0707 0.75 8.73984 0.75H5.44766C5.1168 0.75 4.81328 0.935938 4.66562 1.23398ZM12.3438 4.25H1.84375L2.42344 13.5195C2.46719 14.2113 3.04141 14.75 3.7332 14.75H10.4543C11.1461 14.75 11.7203 14.2113 11.7641 13.5195L12.3438 4.25Z" fill="#EF4444" />
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_14_1430">
+                          <path d="M0.96875 0.75H13.2188V14.75H0.96875V0.75Z" fill="white" />
+                        </clipPath>
+                      </defs>
+                    </svg>
+                    <div className='text-[#EF4444] tex-sm' onClick={() => removeItem(item.id)}>
+                      Remove
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          );
+        })}
         <hr className='opacity-10' />
         <div className='flex flex-col gap-2'>
           <div className='text-[#111827] font-semibold'>
