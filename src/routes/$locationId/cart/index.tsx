@@ -1,7 +1,7 @@
 import { useCartStore } from '@/store/cart';
 import { getCartPrices } from '@/util/price';
 import { createFileRoute } from '@tanstack/react-router'
-import { useEffect, useState } from 'react'
+import { useMemo, useState } from 'react'
 import Data from '@/dataV2.json';
 
 export const Route = createFileRoute('/$locationId/cart/')({
@@ -11,12 +11,24 @@ export const Route = createFileRoute('/$locationId/cart/')({
 function RouteComponent() {
   const [deliveryMethod, setDeliveryMethod] = useState<string | undefined>();
 
-  const { items, removeItem } = useCartStore();
+  const { items, removeItem, updateQty, } = useCartStore();
 
-  useEffect(() => {
-    const prices = getCartPrices();
-    console.log(prices);
-  }, []);
+  const prices = useMemo(() => {
+    return getCartPrices();
+  }, [items]);
+
+  if (items.length === 0) return <div className='my-10 md:my-16'>
+    <div className='container mx-auto p-4 flex flex-col gap-16'>
+      <div className='max-w-[669px] self-center flex flex-col items-center gap-4'>
+        <span className='font-bold text-4xl text-[#111827] text-center'>
+          Your Cart is Empty
+        </span>
+        <p className='text-center text-[#4B5563] text-lg'>
+          Select your preferred Subway branch to start ordering fresh, customizable subs for pickup or delivery.
+        </p>
+      </div>
+    </div>
+  </div>
 
   return <div className='container p-4 flex flex-col mx-auto gap-8 my-10 md:my-16'>
     <div className='flex flex-col items-center'>
@@ -75,7 +87,7 @@ function RouteComponent() {
                     {productDetails?.productName}
                   </div>
                   <div className='text-[#111827] font-semibold'>
-                    ${((productDetails?.price || 0) * (item?.qty || 0))?.toFixed(2)}
+                    ${prices[item.id]}
                   </div>
                 </div>
                 <div className='text-[#4B5563] text-sm'>
@@ -96,6 +108,12 @@ function RouteComponent() {
                 <div className='flex justify-between'>
                   <div className='flex gap-3 items-center'>
                     <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 24 24" fill="none" className="cursor-pointer"
+                      onClick={() => {
+                        if (item.qty > 1) {
+                          return updateQty(item.id, item.qty - 1);
+                        }
+                        return removeItem(item.id);
+                      }}
                     >
                       <path fill-rule="evenodd" clip-rule="evenodd" d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM15.75 12C15.75 12.4142 15.4142 12.75 15 12.75H9C8.58579 12.75 8.25 12.4142 8.25 12C8.25 11.5858 8.58579 11.25 9 11.25H15C15.4142 11.25 15.75 11.5858 15.75 12Z" fill="#1C274C" />
                     </svg>
@@ -103,6 +121,7 @@ function RouteComponent() {
                       {item.qty}
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 24 24" fill="none" className="cursor-pointer"
+                      onClick={() => updateQty(item.id, item.qty + 1)}
                     >
                       <path fill-rule="evenodd" clip-rule="evenodd" d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22ZM12.75 9C12.75 8.58579 12.4142 8.25 12 8.25C11.5858 8.25 11.25 8.58579 11.25 9L11.25 11.25H9C8.58579 11.25 8.25 11.5858 8.25 12C8.25 12.4142 8.58579 12.75 9 12.75H11.25V15C11.25 15.4142 11.5858 15.75 12 15.75C12.4142 15.75 12.75 15.4142 12.75 15L12.75 12.75H15C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25H12.75V9Z" fill="#1C274C" />
                     </svg>

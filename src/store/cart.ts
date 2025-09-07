@@ -14,7 +14,8 @@ export const useCartStore = create<{
         qty: number,
         id: number,
     }) => void,
-    removeItem: (id: number) => void
+    removeItem: (id: number) => void,
+    updateQty: (id: number, qty: number) => void
 }>()(
     persist(
         (set, get) => ({
@@ -28,6 +29,9 @@ export const useCartStore = create<{
             }),
             removeItem: (id: number) => set({
                 items: get().items.filter(item => item.id !== id),
+            }),
+            updateQty: (id: number, qty: number) => set({
+                items: get().items.map(item => item.id === id ? { ...item, qty } : item),
             })
         }),
         {

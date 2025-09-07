@@ -1,12 +1,13 @@
 import { useCartStore } from "@/store/cart"
-import { Link } from "@tanstack/react-router";
+import { Link, useRouter } from "@tanstack/react-router";
 
 export default function Header() {
+    const router = useRouter();
     const { items } = useCartStore();
     return (
         <header className="h-[80px] bg-[#FFFFFF] shadow-[0_1px_2px_0_rgba(0,0,0,0.05]">
             <nav className="container mx-auto flex items-center h-full p-4 justify-between">
-                <div className="flex gap-[31px] items-center">
+                <div className="flex gap-[31px] items-center cursor-pointer" onClick={() => router.navigate({ to: "/" })}>
                     <img src="/logo.png" alt="logo" width={100} height={20} />
                     <span className='text-[#4B5563] text-sm'>
                         Express Ordering
