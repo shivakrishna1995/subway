@@ -1,18 +1,20 @@
 import { getCartPrices } from '@/util/price';
 import { createFileRoute } from '@tanstack/react-router'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 export const Route = createFileRoute('/$locationId/cart/')({
   component: RouteComponent,
 })
 
 function RouteComponent() {
+  const [deliveryMethod, setDeliveryMethod] = useState<string | undefined>()
+
   useEffect(() => {
     const prices = getCartPrices();
     console.log(prices);
   }, []);
 
-  return <div className='container p-4 flex flex-col mx-auto gap-8 my-16'>
+  return <div className='container p-4 flex flex-col mx-auto gap-8 my-10 md:my-16'>
     <div className='flex flex-col items-center'>
       <div className='text-[#111827] text-3xl font-bold text-center'>
         Review Your Order
@@ -36,7 +38,7 @@ function RouteComponent() {
         </div>
       </button>
     </div>
-    <div className='flex gap-8'>
+    <div className='flex gap-8 flex-col md:flex-row'>
       <div className='flex-1 bg-white p-6 flex flex-col gap-10'>
         <div className='flex justify-between items-center'>
           <div className='text-[#111827] font-semibold text-xl'>
@@ -58,7 +60,7 @@ function RouteComponent() {
             </div>
           </div>
         </div>
-        <div className='p-[17px] gap-4 flex'>
+        <div className='p-[17px] gap-4 flex flex-col md:flex-row'>
           <img className='w-[80px] h-[80px]' />
           <div className='flex flex-col gap-3 flex-1'>
             <div className='flex justify-between'>
@@ -112,7 +114,7 @@ function RouteComponent() {
           <textarea className='border-[1px] border-solid border-[#D1D5DB] p-4 rounded-lg w-full' placeholder='Any special requests for your order?'></textarea>
         </div>
       </div>
-      <div className='w-[390px] p-6 flex flex-col gap-6 bg-white'>
+      <div className='w-full md:w-[390px] p-6 flex flex-col gap-6 bg-white'>
         <div className='text-[#111827] font-semibold text-xl'>
           Order Summary
         </div>
@@ -147,8 +149,8 @@ function RouteComponent() {
           <div className='text-[#111827] font-semibold'>
             Delivery Method
           </div>
-          <div className='border-[1px] border-solid border-[#E5E7EB] rounded-lg h-[70px] flex items-center p-3 gap-3'>
-            <input type='radio' name="deliveryMethod" className='w-4 h-4' />
+          <div className='border-[1px] border-solid border-[#E5E7EB] rounded-lg h-[70px] flex items-center p-3 gap-3 cursor-pointer' onClick={() => setDeliveryMethod('pickup')}>
+            <input type='radio' name="deliveryMethod" className='w-4 h-4' checked={deliveryMethod === 'pickup'} />
             <div className='flex flex-col flex-1'>
               <div className='text-[#111827] font-medium'>
                 Pickup
@@ -168,8 +170,8 @@ function RouteComponent() {
               </defs>
             </svg>
           </div>
-          <div className='border-[1px] border-solid border-[#E5E7EB] rounded-lg h-[70px] flex items-center p-3 gap-3'>
-            <input type='radio' name="deliveryMethod" className='w-4 h-4' />
+          <div className='border-[1px] border-solid border-[#E5E7EB] rounded-lg h-[70px] flex items-center p-3 gap-3 cursor-pointer' onClick={() => setDeliveryMethod('delivery')}>
+            <input type='radio' name="deliveryMethod" className='w-4 h-4' checked={deliveryMethod === 'delivery'} />
             <div className='flex flex-col flex-1'>
               <div className='text-[#111827] font-medium'>
                 Delivery
@@ -202,14 +204,16 @@ function RouteComponent() {
             <label htmlFor="phoneNumber" className='text-sm font-medium text-[#374151]'>Phone Number</label>
             <input id="phoneNumber" placeholder="(555) 123-4567" className='border-[1px] border-solid border-[#D1D5DB] rounded-lg p-3' />
           </div>
-          <div className='flex flex-col gap-1'>
-            <label htmlFor="email" className='text-sm font-medium text-[#374151]'>Email</label>
-            <input id="email" placeholder="your@email.com" className='border-[1px] border-solid border-[#D1D5DB] rounded-lg p-3' />
-          </div>
-          <div className='flex flex-col gap-1'>
-            <label htmlFor="deliveryAddress" className='text-sm font-medium text-[#374151]'>Delivery Address</label>
-            <textarea id="deliveryAddress" placeholder="Enter your delivery address" className='border-[1px] border-solid border-[#D1D5DB] rounded-lg p-3' />
-          </div>
+          {deliveryMethod === 'delivery' && <>
+            <div className='flex flex-col gap-1'>
+              <label htmlFor="email" className='text-sm font-medium text-[#374151]'>Email</label>
+              <input id="email" placeholder="your@email.com" className='border-[1px] border-solid border-[#D1D5DB] rounded-lg p-3' />
+            </div>
+            <div className='flex flex-col gap-1'>
+              <label htmlFor="deliveryAddress" className='text-sm font-medium text-[#374151]'>Delivery Address</label>
+              <textarea id="deliveryAddress" placeholder="Enter your delivery address" className='border-[1px] border-solid border-[#D1D5DB] rounded-lg p-3' />
+            </div>
+          </>}
         </div>
         <button
           className='bg-[#007C3E] disabled:bg-[#007c3e8c] h-[48px] p-3 rounded-lg flex justify-center items-center text-white font-medium cursor-pointer hover:bg-[#00934a]'
