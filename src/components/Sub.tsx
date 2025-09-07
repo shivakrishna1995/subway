@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 import Data from "../dataV2.json";
-import { Controller, useForm } from 'react-hook-form';
+import { Controller, useForm, useWatch } from 'react-hook-form';
 import type z from "zod";
 import OrderSchema from "@/schema/order"
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -23,6 +23,8 @@ const Sub = ({ productName, price, description, imageUrl }: ProductProps) => {
         handleSubmit,
         formState,
         reset,
+        resetField,
+        clearErrors,
     } = useForm<z.infer<typeof OrderSchema>>({
         resolver: zodResolver(OrderSchema),
         defaultValues: {
@@ -36,6 +38,43 @@ const Sub = ({ productName, price, description, imageUrl }: ProductProps) => {
     const [qty, setQty] = useState(1);
 
     const { addItem } = useCartStore();
+
+    const productTypeWatch = useWatch({
+        control,
+        name: "type",
+    });
+    const cheeseWatch = useWatch({
+        control,
+        name: "cheese",
+    });
+    const mealDealWatch = useWatch({
+        control,
+        name: "mealDeal",
+    });
+
+    useEffect(() => {
+        resetField("bread");
+        resetField("cheese");
+        resetField("doubleCheese");
+        resetField("toasted");
+
+        clearErrors("bread");
+        clearErrors("cheese");
+        clearErrors("doubleCheese");
+        clearErrors("toasted");
+    }, [productTypeWatch]);
+
+    useEffect(() => {
+        resetField("doubleCheese");
+        clearErrors("doubleCheese");
+    }, [cheeseWatch]);
+
+    useEffect(() => {
+        resetField("sides");
+        resetField("drinks");
+        clearErrors("sides");
+        clearErrors("drinks");
+    }, [mealDealWatch])
 
     return (
         <Dialog open={openDialog} onOpenChange={setOpenDialog}>
