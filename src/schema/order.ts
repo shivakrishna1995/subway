@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export default z.object({
+    productName: z.string(),
     type: z.enum(["6-inch", "Footlong", "Wrap", "Salad Box", "Jack Potato"]),
     bread: z.enum(["Hearty Italian", "Honey & Oat", "Italian Herbs & Cheese", "Italian White", "Wholegrain Bread", "Gluten-Free"]).optional(),
     cheese: z.enum(["Yes", "No"]),

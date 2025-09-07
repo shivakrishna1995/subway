@@ -26,6 +26,7 @@ const Sub = ({ productName, price, description, imageUrl }: ProductProps) => {
     } = useForm<z.infer<typeof OrderSchema>>({
         resolver: zodResolver(OrderSchema),
         defaultValues: {
+            productName,
             salad: [],
             sauces: [],
             sides: [],
@@ -67,7 +68,7 @@ const Sub = ({ productName, price, description, imageUrl }: ProductProps) => {
                         qty,
                         id: Date.now(),
                     });
-                    toast.success(`${qty} sub/s added to cart`);
+                    toast.success(`${qty} item/s added to cart`);
                     reset();
                     setOpenDialog(false);
                 })}>
