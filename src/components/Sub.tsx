@@ -483,7 +483,7 @@ const Sub = ({ productName, price, description, imageUrl }: ProductProps) => {
                             type="submit"
                             disabled={!formState.isValid}
                         >
-                            Add for £200
+                            Add to Cart
                         </button>
                     </div>
                 </form>

@@ -25,4 +25,6 @@ export const getCartPrices = () => {
 
         prices[item.id] = (itemPrice + typePrice + doubleCheesePrice + doubleMeatPrice + sidesPrice + drinksPrice) * item.qty;
     }
+
+    return prices;
 }

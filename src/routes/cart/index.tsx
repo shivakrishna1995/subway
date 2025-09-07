@@ -8,7 +8,8 @@ export const Route = createFileRoute('/cart/')({
 
 function RouteComponent() {
   useEffect(() => {
-    getCartPrices();
+    const prices = getCartPrices();
+    console.log(prices);
   }, []);
 
   return <div>Hello "/cart/"!</div>
