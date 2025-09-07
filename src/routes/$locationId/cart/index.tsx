@@ -2,7 +2,7 @@ import { getCartPrices } from '@/util/price';
 import { createFileRoute } from '@tanstack/react-router'
 import { useEffect } from 'react'
 
-export const Route = createFileRoute('/cart/')({
+export const Route = createFileRoute('/$locationId/cart/')({
   component: RouteComponent,
 })
 

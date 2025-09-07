@@ -9,58 +9,72 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as LocationIdRouteRouteImport } from './routes/$locationId/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as CartIndexRouteImport } from './routes/cart/index'
 import { Route as LocationIdIndexRouteImport } from './routes/$locationId/index'
+import { Route as LocationIdCartIndexRouteImport } from './routes/$locationId/cart/index'
 
+const LocationIdRouteRoute = LocationIdRouteRouteImport.update({
+  id: '/$locationId',
+  path: '/$locationId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CartIndexRoute = CartIndexRouteImport.update({
+const LocationIdIndexRoute = LocationIdIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => LocationIdRouteRoute,
+} as any)
+const LocationIdCartIndexRoute = LocationIdCartIndexRouteImport.update({
   id: '/cart/',
   path: '/cart/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LocationIdIndexRoute = LocationIdIndexRouteImport.update({
-  id: '/$locationId/',
-  path: '/$locationId/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => LocationIdRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/$locationId': typeof LocationIdIndexRoute
-  '/cart': typeof CartIndexRoute
+  '/$locationId': typeof LocationIdRouteRouteWithChildren
+  '/$locationId/': typeof LocationIdIndexRoute
+  '/$locationId/cart': typeof LocationIdCartIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$locationId': typeof LocationIdIndexRoute
-  '/cart': typeof CartIndexRoute
+  '/$locationId/cart': typeof LocationIdCartIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/$locationId': typeof LocationIdRouteRouteWithChildren
   '/$locationId/': typeof LocationIdIndexRoute
-  '/cart/': typeof CartIndexRoute
+  '/$locationId/cart/': typeof LocationIdCartIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/$locationId' | '/cart'
+  fullPaths: '/' | '/$locationId' | '/$locationId/' | '/$locationId/cart'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/$locationId' | '/cart'
-  id: '__root__' | '/' | '/$locationId/' | '/cart/'
+  to: '/' | '/$locationId' | '/$locationId/cart'
+  id: '__root__' | '/' | '/$locationId' | '/$locationId/' | '/$locationId/cart/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  LocationIdIndexRoute: typeof LocationIdIndexRoute
-  CartIndexRoute: typeof CartIndexRoute
+  LocationIdRouteRoute: typeof LocationIdRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/$locationId': {
+      id: '/$locationId'
+      path: '/$locationId'
+      fullPath: '/$locationId'
+      preLoaderRoute: typeof LocationIdRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -68,27 +82,40 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/cart/': {
-      id: '/cart/'
-      path: '/cart'
-      fullPath: '/cart'
-      preLoaderRoute: typeof CartIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/$locationId/': {
       id: '/$locationId/'
-      path: '/$locationId'
-      fullPath: '/$locationId'
+      path: '/'
+      fullPath: '/$locationId/'
       preLoaderRoute: typeof LocationIdIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof LocationIdRouteRoute
+    }
+    '/$locationId/cart/': {
+      id: '/$locationId/cart/'
+      path: '/cart'
+      fullPath: '/$locationId/cart'
+      preLoaderRoute: typeof LocationIdCartIndexRouteImport
+      parentRoute: typeof LocationIdRouteRoute
     }
   }
 }
 
+interface LocationIdRouteRouteChildren {
+  LocationIdIndexRoute: typeof LocationIdIndexRoute
+  LocationIdCartIndexRoute: typeof LocationIdCartIndexRoute
+}
+
+const LocationIdRouteRouteChildren: LocationIdRouteRouteChildren = {
+  LocationIdIndexRoute: LocationIdIndexRoute,
+  LocationIdCartIndexRoute: LocationIdCartIndexRoute,
+}
+
+const LocationIdRouteRouteWithChildren = LocationIdRouteRoute._addFileChildren(
+  LocationIdRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  LocationIdIndexRoute: LocationIdIndexRoute,
-  CartIndexRoute: CartIndexRoute,
+  LocationIdRouteRoute: LocationIdRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
