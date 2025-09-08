@@ -1,23 +1,226 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="/new_logo.jpg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <meta name="theme-color" content="#000000" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+    <!-- Primary SEO -->
+    <title>Subway® Express Ordering – Coventry, Jewellery Quarter, Broadway Plaza & West Orchards | Party Platters, Catering & Delivery</title>
     <meta
       name="description"
-      content="Web site created using create-tsrouter-app"
+      content="Order Subway® online for pickup or delivery across Coventry, Jewellery Quarter, Broadway Plaza & West Orchards. Fresh subs, salads, cookies & party platters. Fast, flexible catering for offices, events & game nights."
     />
-    <!-- <link rel="apple-touch-icon" href="/logo192.png" /> -->
-    <!-- <link rel="manifest" href="/manifest.json" /> -->
-    <title>Subway - Express Ordering</title>
+    <meta name="keywords" content="Subway, order online, Coventry, Jewellery Quarter, Broadway Plaza, West Orchards, party platters, sandwich platters, catering, delivery, pickup, subs, salads, cookies" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <link rel="canonical" href="https://subwayplatters.co.uk/" />
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="https://subwayplatters.co.uk/sitemap.xml" />
+
+    <!-- Favicons -->
+    <link rel="icon" href="/new_logo.jpg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+    <link rel="icon" type="image/png" href="/favicon-32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/favicon-16.png" sizes="16x16" />
+    <meta name="theme-color" content="#009444" />
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Subway® Express Ordering" />
+    <meta property="og:title" content="Subway® – Coventry, Jewellery Quarter, Broadway Plaza & West Orchards" />
+    <meta property="og:description" content="Order subs, salads, cookies & party platters. Pickup or delivery from our Coventry & Birmingham locations." />
+    <meta property="og:url" content="https://subwayplatters.co.uk/" />
+    <meta property="og:image" content="https://subwayplatters.co.uk/og-cover.jpg" />
+    <meta property="og:locale" content="en_GB" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Subway® – Order Online | Coventry & Birmingham" />
+    <meta name="twitter:description" content="Freshly made subs, salads & party platters. Pickup & delivery from Coventry, Jewellery Quarter, Broadway Plaza & West Orchards." />
+    <meta name="twitter:image" content="https://subwayplatters.co.uk/og-cover.jpg" />
+
+    <!-- Geo / Local signals -->
+    <meta name="geo.region" content="GB" />
+    <meta name="geo.placename" content="Coventry, Birmingham" />
+
+    <!-- Preconnects & Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Hreflang -->
+    <link rel="alternate" href="https://subwayplatters.co.uk/" hreflang="en-gb" />
+    <link rel="alternate" href="https://subwayplatters.co.uk/" hreflang="x-default" />
+
+    <!-- JSON-LD: WebSite with SearchAction -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Subway® Express Ordering",
+      "url": "https://subwayplatters.co.uk/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://subwayplatters.co.uk/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    <!-- JSON-LD: Multiple Restaurant locations -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "FastFoodRestaurant",
+          "name": "Subway® Coventry",
+          "image": "https://subwayplatters.co.uk/locations/coventry.jpg",
+          "url": "https://subwayplatters.co.uk/locations/coventry",
+          "servesCuisine": ["Sandwiches", "Fast Food"],
+          "priceRange": "£",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Coventry",
+            "addressRegion": "West Midlands",
+            "addressCountry": "GB"
+          },
+          "geo": { "@type": "GeoCoordinates", "latitude": 52.406, "longitude": -1.519 },
+          "openingHoursSpecification": [{
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+            "opens": "08:00", "closes": "22:00"
+          }],
+          "acceptsReservations": "False",
+          "hasMenu": "https://subwayplatters.co.uk/menu",
+          "menu": "https://subwayplatters.co.uk/menu/platters",
+          "telephone": "+44-0000-000000"
+        },
+        {
+          "@type": "FastFoodRestaurant",
+          "name": "Subway® Jewellery Quarter",
+          "image": "https://subwayplatters.co.uk/locations/jewellery-quarter.jpg",
+          "url": "https://subwayplatters.co.uk/locations/jewellery-quarter",
+          "servesCuisine": ["Sandwiches", "Fast Food"],
+          "priceRange": "£",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Jewellery Quarter, Birmingham",
+            "addressRegion": "West Midlands",
+            "addressCountry": "GB"
+          },
+          "geo": { "@type": "GeoCoordinates", "latitude": 52.489, "longitude": -1.915 },
+          "openingHoursSpecification": [{
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+            "opens": "08:00", "closes": "22:00"
+          }],
+          "acceptsReservations": "False",
+          "hasMenu": "https://subwayplatters.co.uk/menu",
+          "menu": "https://subwayplatters.co.uk/menu/platters",
+          "telephone": "+44-0000-000000"
+        },
+        {
+          "@type": "FastFoodRestaurant",
+          "name": "Subway® Broadway Plaza",
+          "image": "https://subwayplatters.co.uk/locations/broadway-plaza.jpg",
+          "url": "https://subwayplatters.co.uk/locations/broadway-plaza",
+          "servesCuisine": ["Sandwiches", "Fast Food"],
+          "priceRange": "£",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Broadway Plaza, Birmingham",
+            "addressRegion": "West Midlands",
+            "addressCountry": "GB"
+          },
+          "geo": { "@type": "GeoCoordinates", "latitude": 52.475, "longitude": -1.916 },
+          "openingHoursSpecification": [{
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+            "opens": "08:00", "closes": "22:00"
+          }],
+          "acceptsReservations": "False",
+          "hasMenu": "https://subwayplatters.co.uk/menu",
+          "menu": "https://subwayplatters.co.uk/menu/platters",
+          "telephone": "+44-0000-000000"
+        },
+        {
+          "@type": "FastFoodRestaurant",
+          "name": "Subway® West Orchards",
+          "image": "https://subwayplatters.co.uk/locations/west-orchards.jpg",
+          "url": "https://subwayplatters.co.uk/locations/west-orchards",
+          "servesCuisine": ["Sandwiches", "Fast Food"],
+          "priceRange": "£",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "West Orchards, Coventry",
+            "addressRegion": "West Midlands",
+            "addressCountry": "GB"
+          },
+          "geo": { "@type": "GeoCoordinates", "latitude": 52.409, "longitude": -1.512 },
+          "openingHoursSpecification": [{
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+            "opens": "08:00", "closes": "22:00"
+          }],
+          "acceptsReservations": "False",
+          "hasMenu": "https://subwayplatters.co.uk/menu",
+          "menu": "https://subwayplatters.co.uk/menu/platters",
+          "telephone": "+44-0000-000000"
+        }
+      ]
+    }
+    </script>
+
+    <!-- JSON-LD: Menu with Platters -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Menu",
+      "name": "Subway® Menu",
+      "url": "https://subwayplatters.co.uk/menu",
+      "hasMenuSection": [
+        {
+          "@type": "MenuSection",
+          "name": "Platters",
+          "description": "Party & office sandwich platters with a mix of favourites. Serves 5–10.",
+          "hasMenuItem": [
+            {
+              "@type": "MenuItem",
+              "name": "Classic Sub Platter",
+              "description": "A mix of classic subs cut into sharable portions.",
+              "offers": { "@type": "Offer", "priceCurrency": "GBP", "price": "29.99", "availability": "https://schema.org/InStock" }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Veggie Platter",
+              "description": "Vegetarian selection with sauces on the side.",
+              "offers": { "@type": "Offer", "priceCurrency": "GBP", "price": "27.99", "availability": "https://schema.org/InStock" }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Protein Platter",
+              "description": "High-protein subs ideal for teams & events.",
+              "offers": { "@type": "Offer", "priceCurrency": "GBP", "price": "32.99", "availability": "https://schema.org/InStock" }
+            }
+          ]
+        },
+        { "@type": "MenuSection", "name": "Subs", "hasMenuItem": [{ "@type": "MenuItem", "name": "Build Your Own Sub" }] },
+        { "@type": "MenuSection", "name": "Salads" },
+        { "@type": "MenuSection", "name": "Cookies" },
+        { "@type": "MenuSection", "name": "Drinks" }
+      ]
+    }
+    </script>
   </head>
+
   <body>
     <div id="app"></div>
     <script type="module" src="/src/main.tsx"></script>
+
+    <noscript>
+      <p>Order Subway® online for pickup or delivery in Coventry, Jewellery Quarter, Broadway Plaza &amp; West Orchards. Fresh subs, salads, cookies &amp; party platters for events and offices.</p>
+    </noscript>
   </body>
 </html>
