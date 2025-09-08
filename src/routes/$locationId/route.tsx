@@ -6,6 +6,7 @@ export const Route = createFileRoute('/$locationId')({
 })
 
 function RouteComponent() {
+
     return <div>
         <Header />
         <Outlet />

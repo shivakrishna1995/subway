@@ -15,7 +15,8 @@ export const useCartStore = create<{
         id: number,
     }) => void,
     removeItem: (id: number) => void,
-    updateQty: (id: number, qty: number) => void
+    updateQty: (id: number, qty: number) => void,
+    clear: () => void
 }>()(
     persist(
         (set, get) => ({
@@ -32,7 +33,8 @@ export const useCartStore = create<{
             }),
             updateQty: (id: number, qty: number) => set({
                 items: get().items.map(item => item.id === id ? { ...item, qty } : item),
-            })
+            }),
+            clear: () => set({ items: [] }),
         }),
         {
             name: 'subway-cart-storage',

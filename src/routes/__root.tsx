@@ -9,7 +9,7 @@ export const Route = createRootRoute({
     <>
       <Outlet />
       <Footer />
-      <ToastContainer theme="colored" />
+      <ToastContainer theme="colored" position='bottom-right' />
     </>
   ),
 })

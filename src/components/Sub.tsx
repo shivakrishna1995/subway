@@ -497,7 +497,7 @@ const Sub = ({ productName, price, description, imageUrl }: ProductProps) => {
                         </div>
                     </div>
 
-                    <div className="flex flex-col border-t-[1px] border-solid border-[#E5E7EB] py-8 gap-7">
+                    <div className="flex flex-col border-t-[1px] border-solid border-[#E5E7EB] py-2 gap-7">
                         <div className="flex gap-10 items-center justify-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 24 24" fill="none" className="cursor-pointer"
                                 onClick={() => {

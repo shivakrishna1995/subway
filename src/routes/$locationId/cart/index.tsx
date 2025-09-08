@@ -4,6 +4,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { useMemo, useState } from 'react'
 import Data from '@/dataV2.json';
 import { toast } from 'react-toastify';
+import emailjs from '@emailjs/browser';
 
 export const Route = createFileRoute('/$locationId/cart/')({
   component: RouteComponent,
@@ -17,13 +18,15 @@ const Branches = {
 };
 
 function RouteComponent() {
+  const [orderPlacing, setOrderPlacing] = useState(false);
+
   const { locationId } = Route.useParams();
 
   const branchName = Branches[locationId as keyof typeof Branches];
 
   const [deliveryMethod, setDeliveryMethod] = useState<string | undefined>();
 
-  const { items, removeItem, updateQty, } = useCartStore();
+  const { items, removeItem, updateQty, clear } = useCartStore();
 
   const [order, setOrder] = useState({
     name: '',
@@ -37,8 +40,87 @@ function RouteComponent() {
     return getCartPrices();
   }, [items]);
 
-  const placeOrder = () => {
-    toast.success('Order placed successfully');
+  const placeOrder = async () => {
+    const templateParams = {
+      "order_id": Date.now(),
+      "orders": items.map(item => ({
+        "name": item.item.productName,
+        // "description": `Type: ${item.item.type} | Bread: ${item.item.bread && ``} | Cheese: ${item.item.cheese} | Double Cheese: ${item.item.doubleCheese} | Double Meat: ${item.item.doubleMeat} | Toasted: ${item.item.toasted} | Salad: ${item.item.salad.join(', ')} | Sauces: ${item.item.sauces.join(', ')} | Sides: ${item.item.sides?.join(', ')} | Drinks: ${item.item.drinks?.join(', ')}`,
+        description: (() => {
+          let str = `Type: ${item.item.type}`;
+
+          if (item.item.bread) {
+            str += ` | Bread: ${item.item.bread}`;
+          }
+
+          if (item.item.cheese) {
+            str += ` | Cheese: ${item.item.cheese}`;
+          }
+
+          if (item.item.doubleCheese) {
+            str += ` | Double Cheese: ${item.item.doubleCheese}`;
+          }
+
+          if (item.item.doubleMeat) {
+            str += ` | Double Meat: ${item.item.doubleMeat}`;
+          }
+
+          if (item.item.toasted) {
+            str += ` | Toasted: ${item.item.toasted}`;
+          }
+
+          if (item.item.salad.length > 0) {
+            str += ` | Salad: ${item.item.salad.join(', ')}`;
+          }
+
+          if (item.item.sauces.length > 0) {
+            str += ` | Sauces: ${item.item.sauces.join(', ')}`;
+          }
+
+          if (item.item.mealDeal) {
+            str += ` | Meal Deal: ${item.item.mealDeal}`;
+          }
+
+          if (item.item.sides?.length) {
+            str += ` | Sides: ${item.item.sides?.join(', ')}`;
+          }
+
+          if (item.item.drinks?.length) {
+            str += ` | Drinks: ${item.item.drinks?.join(', ')}`;
+          }
+
+          return str
+        })(),
+        "image_url": Data.subs.products.find(p => p.productName === item.item.productName)?.imageUrl || "",
+        "units": item.qty,
+        "price": prices[item.id],
+      })),
+      "cost": {
+        "shipping": 0.00,
+        "tax": 0.00,
+        "total": Object.values(prices).reduce((total, price) => total + price, 0),
+      },
+      name: order.name,
+      phone: order.phone,
+      email: order.email,
+      address: order.address,
+      instructions: order.instructions && `Special Instructions: ${order.instructions}`,
+      fromEmail: "subway37344@gmail.com",
+      toEmail: order.email,
+      branch: branchName,
+    };
+    try {
+      setOrderPlacing(true);
+      await emailjs.send('service_fkb1q59', 'template_0b20eou', templateParams, {
+        publicKey: 'I8AmLFuFd_z-UL8FK',
+      })
+      toast.success('Order placed successfully');
+      clear();
+    } catch (error) {
+      toast.error('Failed to place order');
+    } finally {
+      setOrderPlacing(false);
+    }
   };
 
   if (items.length === 0) return <div className='my-10 md:my-16'>
@@ -84,21 +166,6 @@ function RouteComponent() {
           <div className='text-[#111827] font-semibold text-xl'>
             Your Items ({items.length})
           </div>
-          <div className='flex items-center gap-1 cursor-pointer'>
-            <svg width="13" height="15" viewBox="0 0 13 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <g clip-path="url(#clip0_14_1283)">
-                <path d="M7.1875 2.9375C7.1875 2.45352 6.79648 2.0625 6.3125 2.0625C5.82852 2.0625 5.4375 2.45352 5.4375 2.9375V6.875H1.5C1.01602 6.875 0.625 7.26602 0.625 7.75C0.625 8.23398 1.01602 8.625 1.5 8.625H5.4375V12.5625C5.4375 13.0465 5.82852 13.4375 6.3125 13.4375C6.79648 13.4375 7.1875 13.0465 7.1875 12.5625V8.625H11.125C11.609 8.625 12 8.23398 12 7.75C12 7.26602 11.609 6.875 11.125 6.875H7.1875V2.9375Z" fill="#007C3E" />
-              </g>
-              <defs>
-                <clipPath id="clip0_14_1283">
-                  <path d="M0.1875 0.75H12.4375V14.75H0.1875V0.75Z" fill="white" />
-                </clipPath>
-              </defs>
-            </svg>
-            <div className='text-[#007C3E] tetx-sm font-medium'>
-              Add More Items
-            </div>
-          </div>
         </div>
         {items.map((item) => {
           const productDetails = Data.subs.products.find(p => p.productName === item.item.productName);
@@ -122,11 +189,11 @@ function RouteComponent() {
                     {item.item.doubleCheese && <li className='text-sm'>Double Cheese: {item.item.doubleCheese}</li>}
                     {item.item.doubleMeat && <li className='text-sm'>Double Meat: {item.item.doubleMeat}</li>}
                     {item.item.toasted && <li className='text-sm'>Toasted: {item.item.toasted}</li>}
-                    {item.item.salad && <li className='text-sm'>Salad: {item.item.salad.join(', ')}</li>}
-                    {item.item.sauces && <li className='text-sm'>Sauce: {item.item.sauces.join(', ')}</li>}
+                    {item.item.salad?.length > 0 && <li className='text-sm'>Salad: {item.item.salad.join(', ')}</li>}
+                    {item.item.sauces?.length > 0 && <li className='text-sm'>Sauce: {item.item.sauces.join(', ')}</li>}
                     {item.item.mealDeal && <li className='text-sm'>Meal: {item.item.mealDeal}</li>}
-                    {item.item.sides && <li className='text-sm'>Sides: {item.item.sides.join(', ')}</li>}
-                    {item.item.drinks && <li className='text-sm'>Drinks: {item.item.drinks.join(', ')}</li>}
+                    {item.item.mealDeal === 'Yes' && item.item.sides && <li className='text-sm'>Sides: {item.item.sides.join(', ')}</li>}
+                    {item.item.mealDeal === 'Yes' && item.item.drinks && <li className='text-sm'>Drinks: {item.item.drinks.join(', ')}</li>}
                   </ul>
                 </div>
                 <div className='flex justify-between'>
@@ -175,7 +242,7 @@ function RouteComponent() {
           <div className='text-[#111827] font-semibold'>
             Special Instructions
           </div>
-          <textarea className='border-[1px] border-solid border-[#D1D5DB] p-4 rounded-lg w-full' placeholder='Any special requests for your order?'></textarea>
+          <textarea className='border-[1px] border-solid border-[#D1D5DB] p-4 rounded-lg w-full' placeholder='Any special requests for your order?' value={order.instructions} onChange={(e) => setOrder({ ...order, instructions: e.target.value })}></textarea>
         </div>
       </div>
       <div className='w-full md:w-[390px] p-6 flex flex-col gap-6 bg-white'>
@@ -280,10 +347,15 @@ function RouteComponent() {
           </>}
         </div>
         <button
-          className='bg-[#007C3E] disabled:bg-[#007c3e8c] h-[48px] p-3 rounded-lg flex justify-center items-center text-white font-medium cursor-pointer hover:bg-[#00934a]'
+          className='bg-[#007C3E] disabled:bg-[#007c3e8c] h-[48px] p-3 rounded-lg flex justify-center items-center text-white font-medium cursor-pointer hover:bg-[#00934a] gap-2'
           onClick={placeOrder}
+          disabled={orderPlacing || !order.name || !order.phone || (deliveryMethod === 'delivery' && (!order.email || !order.address))}
         >
+          {!orderPlacing && <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24" fill="none" className='animate-spin'>
+            <path d="M20.0001 12C20.0001 13.3811 19.6425 14.7386 18.9623 15.9405C18.282 17.1424 17.3022 18.1477 16.1182 18.8587C14.9341 19.5696 13.5862 19.9619 12.2056 19.9974C10.825 20.0328 9.45873 19.7103 8.23975 19.0612" stroke="white" stroke-width="3.55556" stroke-linecap="round" />
+          </svg>}
           Place Order - ${Object.values(prices).reduce((total, price) => total + price, 0).toFixed(2)}
+          <div></div>
         </button>
         <div className='bg-[#F9FAFB] rounded-lg p-3 text-sm text-[#4B5563]'>
           Payment will be collected upon delivery or pick-up
