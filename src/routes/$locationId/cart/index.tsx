@@ -3,19 +3,43 @@ import { getCartPrices } from '@/util/price';
 import { createFileRoute } from '@tanstack/react-router'
 import { useMemo, useState } from 'react'
 import Data from '@/dataV2.json';
+import { toast } from 'react-toastify';
 
 export const Route = createFileRoute('/$locationId/cart/')({
   component: RouteComponent,
 })
 
+const Branches = {
+  "coventry": "Coventry",
+  "jewellery-quarter": "Jewellery Quarter",
+  "broadway-plaza": "Broadway Plaza",
+  "west-orchards": "West Orchards",
+};
+
 function RouteComponent() {
+  const { locationId } = Route.useParams();
+
+  const branchName = Branches[locationId as keyof typeof Branches];
+
   const [deliveryMethod, setDeliveryMethod] = useState<string | undefined>();
 
   const { items, removeItem, updateQty, } = useCartStore();
 
+  const [order, setOrder] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    address: '',
+    instructions: '',
+  });
+
   const prices = useMemo(() => {
     return getCartPrices();
   }, [items]);
+
+  const placeOrder = () => {
+    toast.success('Order placed successfully');
+  };
 
   if (items.length === 0) return <div className='my-10 md:my-16'>
     <div className='container mx-auto p-4 flex flex-col gap-16'>
@@ -50,7 +74,7 @@ function RouteComponent() {
           </defs>
         </svg>
         <div className='text-[#FFFFFF]'>
-          Downtown Branch - 123 Main Street
+          {branchName}
         </div>
       </button>
     </div>
@@ -87,7 +111,7 @@ function RouteComponent() {
                     {productDetails?.productName}
                   </div>
                   <div className='text-[#111827] font-semibold'>
-                    ${prices[item.id]}
+                    ${prices[item.id].toFixed(2)}
                   </div>
                 </div>
                 <div className='text-[#4B5563] text-sm'>
@@ -155,7 +179,7 @@ function RouteComponent() {
         </div>
       </div>
       <div className='w-full md:w-[390px] p-6 flex flex-col gap-6 bg-white'>
-        <div className='text-[#111827] font-semibold text-xl'>
+        {/* <div className='text-[#111827] font-semibold text-xl'>
           Order Summary
         </div>
         <div className='flex flex-col gap-3'>
@@ -164,15 +188,15 @@ function RouteComponent() {
               Subtotal
             </div>
             <div className='text-[#000000] font-medium'>
-              $33.46
+              ${Object.values(prices).reduce((total, price) => total + price, 0).toFixed(2)}
             </div>
           </div>
           <div className='flex justify-between'>
             <div className='text-[#4B5563]'>
-              Delivery Fee
+              Tax
             </div>
             <div className='text-[#000000] font-medium'>
-              $2.99
+              $0.00
             </div>
           </div>
           <hr className='opacity-10' />
@@ -181,10 +205,10 @@ function RouteComponent() {
               Total
             </div>
             <div className='text-[#007C3E] font-semibold'>
-              $39.13
+              ${(Object.values(prices).reduce((total, price) => total + price, 0) + 0).toFixed(2)}
             </div>
           </div>
-        </div>
+        </div> */}
         <div className='flex flex-col gap-3'>
           <div className='text-[#111827] font-semibold'>
             Delivery Method
@@ -238,27 +262,28 @@ function RouteComponent() {
           </div>
           <div className='flex flex-col gap-1'>
             <label htmlFor="fullName" className='text-sm font-medium text-[#374151]'>Full Name</label>
-            <input id="fullName" placeholder="Enter your name" className='border-[1px] border-solid border-[#D1D5DB] rounded-lg p-3' />
+            <input id="fullName" placeholder="Enter your name" className='border-[1px] border-solid border-[#D1D5DB] rounded-lg p-3' value={order.name} onChange={(e) => setOrder({ ...order, name: e.target.value })} />
           </div>
           <div className='flex flex-col gap-1'>
             <label htmlFor="phoneNumber" className='text-sm font-medium text-[#374151]'>Phone Number</label>
-            <input id="phoneNumber" placeholder="(555) 123-4567" className='border-[1px] border-solid border-[#D1D5DB] rounded-lg p-3' />
+            <input id="phoneNumber" placeholder="(555) 123-4567" className='border-[1px] border-solid border-[#D1D5DB] rounded-lg p-3' value={order.phone} onChange={(e) => setOrder({ ...order, phone: e.target.value })} />
           </div>
           {deliveryMethod === 'delivery' && <>
             <div className='flex flex-col gap-1'>
               <label htmlFor="email" className='text-sm font-medium text-[#374151]'>Email</label>
-              <input id="email" placeholder="your@email.com" className='border-[1px] border-solid border-[#D1D5DB] rounded-lg p-3' />
+              <input id="email" placeholder="your@email.com" className='border-[1px] border-solid border-[#D1D5DB] rounded-lg p-3' value={order.email} onChange={(e) => setOrder({ ...order, email: e.target.value })} />
             </div>
             <div className='flex flex-col gap-1'>
               <label htmlFor="deliveryAddress" className='text-sm font-medium text-[#374151]'>Delivery Address</label>
-              <textarea id="deliveryAddress" placeholder="Enter your delivery address" className='border-[1px] border-solid border-[#D1D5DB] rounded-lg p-3' />
+              <textarea id="deliveryAddress" placeholder="Enter your delivery address" className='border-[1px] border-solid border-[#D1D5DB] rounded-lg p-3' value={order.address} onChange={(e) => setOrder({ ...order, address: e.target.value })} />
             </div>
           </>}
         </div>
         <button
           className='bg-[#007C3E] disabled:bg-[#007c3e8c] h-[48px] p-3 rounded-lg flex justify-center items-center text-white font-medium cursor-pointer hover:bg-[#00934a]'
+          onClick={placeOrder}
         >
-          Place Order - $39.13
+          Place Order - ${Object.values(prices).reduce((total, price) => total + price, 0).toFixed(2)}
         </button>
         <div className='bg-[#F9FAFB] rounded-lg p-3 text-sm text-[#4B5563]'>
           Payment will be collected upon delivery or pick-up
