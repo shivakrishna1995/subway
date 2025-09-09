@@ -92,7 +92,7 @@ function RouteComponent() {
 
           return str
         })(),
-        "image_url": (item.itemType === "subs" ? Data.subs.products.find(p => p.productName === item.item.productName)?.imageUrl : Data.platters.products.find(p => p.productName === item.item.productName)?.imageUrl) || "",
+        "image_url": Data.subs.products.find(p => p.productName === item.item.productName)?.imageUrl || "",
         "units": item.qty,
         "price": prices[item.id],
       })).concat(platters.map(platter => ({
@@ -116,6 +116,7 @@ function RouteComponent() {
       toEmail: order.email,
       branch: branchName,
     };
+    debugger;
     try {
       setOrderPlacing(true);
       await emailjs.send('service_fkb1q59', 'template_0b20eou', templateParams, {
