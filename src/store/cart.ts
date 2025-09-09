@@ -72,7 +72,7 @@ export const useCartStore = create<{
             updatePlatterQty: (id: number, qty: number) => set({
                 platters: get().platters.map(item => item.id === id ? { ...item, qty } : item),
             }),
-            clear: () => set({ items: [] }),
+            clear: () => set({ items: [], platters: [] }),
         }),
         {
             name: 'subway-cart-storage',

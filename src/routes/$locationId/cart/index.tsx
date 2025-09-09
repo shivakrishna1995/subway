@@ -5,6 +5,7 @@ import { useMemo, useState } from 'react'
 import Data from '@/dataV2.json';
 import { toast } from 'react-toastify';
 import emailjs from '@emailjs/browser';
+import z from 'zod';
 
 export const Route = createFileRoute('/$locationId/cart/')({
   component: RouteComponent,
@@ -26,7 +27,7 @@ function RouteComponent() {
 
   const [deliveryMethod, setDeliveryMethod] = useState<string | undefined>();
 
-  const { items, removeItem, updateQty, clear } = useCartStore();
+  const { items, removeItem, updateQty, clear, platters, removePlatter, updatePlatterQty, } = useCartStore();
 
   const [order, setOrder] = useState({
     name: '',
@@ -38,7 +39,7 @@ function RouteComponent() {
 
   const prices = useMemo(() => {
     return getCartPrices();
-  }, [items]);
+  }, [items, platters]);
 
   const placeOrder = async () => {
     const templateParams = {
@@ -91,10 +92,16 @@ function RouteComponent() {
 
           return str
         })(),
-        "image_url": Data.subs.products.find(p => p.productName === item.item.productName)?.imageUrl || "",
+        "image_url": (item.itemType === "subs" ? Data.subs.products.find(p => p.productName === item.item.productName)?.imageUrl : Data.platters.products.find(p => p.productName === item.item.productName)?.imageUrl) || "",
         "units": item.qty,
         "price": prices[item.id],
-      })),
+      })).concat(platters.map(platter => ({
+        "name": platter.item.productName,
+        "description": Data.platters.products.find(p => p.productName === platter.item.productName)?.description || "",
+        "image_url": Data.platters.products.find(p => p.productName === platter.item.productName)?.imageUrl || "",
+        "units": platter.qty,
+        "price": prices[platter.id],
+      }))),
       "cost": {
         "shipping": 0.00,
         "tax": 0.00,
@@ -123,7 +130,7 @@ function RouteComponent() {
     }
   };
 
-  if (items.length === 0) return <div className='my-10 md:my-16'>
+  if (items.length === 0 && platters.length === 0) return <div className='my-10 md:my-16'>
     <div className='container mx-auto p-4 flex flex-col gap-16'>
       <div className='max-w-[669px] self-center flex flex-col items-center gap-4'>
         <span className='font-bold text-4xl text-[#111827] text-center'>
@@ -164,46 +171,66 @@ function RouteComponent() {
       <div className='flex-1 bg-white p-6 flex flex-col gap-10'>
         <div className='flex justify-between items-center'>
           <div className='text-[#111827] font-semibold text-xl'>
-            Your Items ({items.length})
+            Your Items ({items.length + platters.length})
           </div>
         </div>
-        {items.map((item) => {
-          const productDetails = Data.subs.products.find(p => p.productName === item.item.productName);
+        {[...items, ...platters].map((item) => {
+
+          let productDetails;
+          if (item.itemType === 'subs') {
+            productDetails = Data.subs.products.find(p => p.productName === item.item.productName);
+          } else {
+            productDetails = Data.platters.products.find(p => p.productName === item.item.productName);
+          }
+
           return (
             <div className='p-[17px] gap-4 flex flex-col md:flex-row' key={item.id}>
               <img className='w-[80px] h-[80px] object-cover' src={productDetails?.imageUrl} />
               <div className='flex flex-col gap-3 flex-1'>
                 <div className='flex justify-between'>
-                  <div className='text-[#111827] font-semibold'>
-                    {productDetails?.productName}
+                  <div className='flex flex-col gap-1'>
+                    <div className='text-[#111827] font-semibold'>
+                      {productDetails?.productName}
+                    </div>
+                    <div className='text-[#111827]'>
+                      {productDetails?.description}
+                    </div>
                   </div>
                   <div className='text-[#111827] font-semibold'>
                     ${prices[item.id].toFixed(2)}
                   </div>
                 </div>
-                <div className='text-[#4B5563] text-sm'>
-                  <ul>
-                    {item.item.type && <li className='text-sm'>Type: {item.item.type}</li>}
-                    {item.item.bread && <li className='text-sm'>Type: {item.item.bread}</li>}
-                    {item.item.cheese && <li className='text-sm'>Cheese: {item.item.cheese}</li>}
-                    {item.item.doubleCheese && <li className='text-sm'>Double Cheese: {item.item.doubleCheese}</li>}
-                    {item.item.doubleMeat && <li className='text-sm'>Double Meat: {item.item.doubleMeat}</li>}
-                    {item.item.toasted && <li className='text-sm'>Toasted: {item.item.toasted}</li>}
-                    {item.item.salad?.length > 0 && <li className='text-sm'>Salad: {item.item.salad.join(', ')}</li>}
-                    {item.item.sauces?.length > 0 && <li className='text-sm'>Sauce: {item.item.sauces.join(', ')}</li>}
-                    {item.item.mealDeal && <li className='text-sm'>Meal: {item.item.mealDeal}</li>}
-                    {item.item.mealDeal === 'Yes' && item.item.sides && <li className='text-sm'>Sides: {item.item.sides.join(', ')}</li>}
-                    {item.item.mealDeal === 'Yes' && item.item.drinks && <li className='text-sm'>Drinks: {item.item.drinks.join(', ')}</li>}
-                  </ul>
-                </div>
+                {item.itemType === 'subs' && (
+                  <div className='text-[#4B5563] text-sm'>
+                    <ul>
+                      {item.item.type && <li className='text-sm'>Type: {item.item.type}</li>}
+                      {item.item.bread && <li className='text-sm'>Type: {item.item.bread}</li>}
+                      {item.item.cheese && <li className='text-sm'>Cheese: {item.item.cheese}</li>}
+                      {item.item.doubleCheese && <li className='text-sm'>Double Cheese: {item.item.doubleCheese}</li>}
+                      {item.item.doubleMeat && <li className='text-sm'>Double Meat: {item.item.doubleMeat}</li>}
+                      {item.item.toasted && <li className='text-sm'>Toasted: {item.item.toasted}</li>}
+                      {item.item.salad?.length > 0 && <li className='text-sm'>Salad: {item.item.salad.join(', ')}</li>}
+                      {item.item.sauces?.length > 0 && <li className='text-sm'>Sauce: {item.item.sauces.join(', ')}</li>}
+                      {item.item.mealDeal && <li className='text-sm'>Meal: {item.item.mealDeal}</li>}
+                      {item.item.mealDeal === 'Yes' && item.item.sides && <li className='text-sm'>Sides: {item.item.sides.join(', ')}</li>}
+                      {item.item.mealDeal === 'Yes' && item.item.drinks && <li className='text-sm'>Drinks: {item.item.drinks.join(', ')}</li>}
+                    </ul>
+                  </div>
+                )}
                 <div className='flex justify-between'>
                   <div className='flex gap-3 items-center'>
                     <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 24 24" fill="none" className="cursor-pointer"
                       onClick={() => {
-                        if (item.qty > 1) {
-                          return updateQty(item.id, item.qty - 1);
+                        if (item.itemType === 'subs') {
+                          if (item.qty > 1) {
+                            return updateQty(item.id, item.qty - 1);
+                          }
+                          return removeItem(item.id);
                         }
-                        return removeItem(item.id);
+                        if (item.qty > 1) {
+                          return updatePlatterQty(item.id, item.qty - 1);
+                        }
+                        return removePlatter(item.id);
                       }}
                     >
                       <path fill-rule="evenodd" clip-rule="evenodd" d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM15.75 12C15.75 12.4142 15.4142 12.75 15 12.75H9C8.58579 12.75 8.25 12.4142 8.25 12C8.25 11.5858 8.58579 11.25 9 11.25H15C15.4142 11.25 15.75 11.5858 15.75 12Z" fill="#1C274C" />
@@ -212,7 +239,12 @@ function RouteComponent() {
                       {item.qty}
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 24 24" fill="none" className="cursor-pointer"
-                      onClick={() => updateQty(item.id, item.qty + 1)}
+                      onClick={() => {
+                        if (item.itemType === 'subs') {
+                          return updateQty(item.id, item.qty + 1);
+                        }
+                        return updatePlatterQty(item.id, item.qty + 1);
+                      }}
                     >
                       <path fill-rule="evenodd" clip-rule="evenodd" d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22ZM12.75 9C12.75 8.58579 12.4142 8.25 12 8.25C11.5858 8.25 11.25 8.58579 11.25 9L11.25 11.25H9C8.58579 11.25 8.25 11.5858 8.25 12C8.25 12.4142 8.58579 12.75 9 12.75H11.25V15C11.25 15.4142 11.5858 15.75 12 15.75C12.4142 15.75 12.75 15.4142 12.75 15L12.75 12.75H15C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25H12.75V9Z" fill="#1C274C" />
                     </svg>
@@ -228,7 +260,12 @@ function RouteComponent() {
                         </clipPath>
                       </defs>
                     </svg>
-                    <div className='text-[#EF4444] tex-sm' onClick={() => removeItem(item.id)}>
+                    <div className='text-[#EF4444] tex-sm' onClick={() => {
+                      if (item.itemType === 'subs') {
+                        return removeItem(item.id);
+                      }
+                      return removePlatter(item.id);
+                    }}>
                       Remove
                     </div>
                   </div>
