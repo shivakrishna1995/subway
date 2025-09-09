@@ -437,5 +437,44 @@
                 }
             ]
         }
+    },
+    "platters": {
+        "products": [
+            {
+                "productId": 1,
+                "productName": "Classic Platter",
+                "description": "Tuna Mayo, Rotisserie-Style chicken, Spicy Italian, Veggie Delite",
+                "imageUrl": "https://www.subway.com/en-gb/-/media/emea/europe/uk/catering/cp_50-50_easy-order_dsk_640x640.jpg?la=en-GB&h=640&w=640&mw=1280",
+                "price": 29.00
+            },
+            {
+                "productId": 2,
+                "productName": "Freashly Baked 100 Cookies",
+                "description": "Yes 100 assorted cookies (or all of the same flavour)",
+                "imageUrl": "https://media.amp.subway.com/adaptivemedia/rendition?id=5b293fab460457fe59ae08b688cd289592151acb&clid=srow&prid=SubCropBgd&wd=330&grv=Center&hofs=0&vofs=0&cwd=7750&cht=7750&op=png&bwd=275&bht=275",
+                "price": 36.74
+            },
+            {
+                "productId": 3,
+                "productName": "Freashly Baked 50 Cookies",
+                "description": "Ideal for parties or sharing or just for you!!!",
+                "imageUrl": "https://media.amp.subway.com/adaptivemedia/rendition?id=5b293fab460457fe59ae08b688cd289592151acb&clid=srow&prid=SubCropBgd&wd=330&grv=Center&hofs=0&vofs=0&cwd=7750&cht=7750&op=png&bwd=275&bht=275",
+                "price": 21.00
+            },
+            {
+                "productId": 4,
+                "productName": "Meat Platter",
+                "description": "Ham, Rotisserie-Style Chicken, Turkey and Ham, Italian B.M.T.",
+                "imageUrl": "https://www.subway.com/en-gb/-/media/emea/europe/uk/catering/cp_50-50_easy-order_dsk_640x640.jpg?la=en-GB&h=640&w=640&mw=1280",
+                "price": 29.00
+            },
+            {
+                "productId": 5,
+                "productName": "Veggie Platter",
+                "description": "Veggie Delite and Spiced plant patty subs. Can be turned into a vegan platter by swapping the cheese into Vegan cheese",
+                "imageUrl": "https://www.subway.com/en-gb/-/media/emea/europe/uk/catering/cp_50-50_easy-order_dsk_640x640.jpg?la=en-GB&h=640&w=640&mw=1280",
+                "price": 29.00
+            }
+        ]
     }
 }

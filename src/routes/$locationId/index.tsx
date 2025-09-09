@@ -2,12 +2,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { createFileRoute } from '@tanstack/react-router'
 import Data from '@/dataV2.json';
 import Sub from '@/components/Sub';
+import Platter from '@/components/Platter';
 
 export const Route = createFileRoute('/$locationId/')({
     component: RouteComponent,
 })
 
 const Subs = Data.subs;
+const Platters = Data.platters;
 
 function RouteComponent() {
     return <>
@@ -17,6 +19,7 @@ function RouteComponent() {
                     <div className='container mx-auto px-4'>
                         <TabsList className='flex gap-8'>
                             <TabsTrigger value='Subs' className='cursor-pointer hover:text-[#007C3E] font-medium text-[#4B5563] data-[state=active]:text-[#007C3E] py-5 data-[state=active]:pb-[18.8px] data-[state=active]:bg-none data-[state=active]:shadow-none data-[state=active]:border-b-[2px] data-[state=active]:border-b-solid data-[state=active]:border-b-[#007C3E] rounded-none px-0'>Subs</TabsTrigger>
+                            <TabsTrigger value='Platters' className='cursor-pointer hover:text-[#007C3E] font-medium text-[#4B5563] data-[state=active]:text-[#007C3E] py-5 data-[state=active]:pb-[18.8px] data-[state=active]:bg-none data-[state=active]:shadow-none data-[state=active]:border-b-[2px] data-[state=active]:border-b-solid data-[state=active]:border-b-[#007C3E] rounded-none px-0'>Platters</TabsTrigger>
                         </TabsList>
                     </div>
                 </div>
@@ -25,6 +28,19 @@ function RouteComponent() {
                     <div className='container mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 py-6'>
                         {Subs.products.map((product, index) => (
                             <Sub
+                                key={index}
+                                productName={product.productName}
+                                price={product.price}
+                                description={product.description}
+                                imageUrl={product.imageUrl}
+                            />
+                        ))}
+                    </div>
+                </TabsContent>
+                <TabsContent value='Platters'>
+                    <div className='container mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 py-6'>
+                        {Platters.products.map((product, index) => (
+                            <Platter
                                 key={index}
                                 productName={product.productName}
                                 price={product.price}

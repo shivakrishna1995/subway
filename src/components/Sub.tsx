@@ -104,6 +104,7 @@ const Sub = ({ productName, price, description, imageUrl }: ProductProps) => {
                 <form className="flex flex-col gap-6 h-full" onSubmit={handleSubmit((item) => {
                     addItem({
                         item,
+                        itemType: 'subs',
                         qty,
                         id: Date.now(),
                     });
