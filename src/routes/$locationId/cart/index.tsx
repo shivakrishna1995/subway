@@ -5,7 +5,6 @@ import { useMemo, useState } from 'react'
 import Data from '@/dataV2.json';
 import { toast } from 'react-toastify';
 import emailjs from '@emailjs/browser';
-import z from 'zod';
 
 export const Route = createFileRoute('/$locationId/cart/')({
   component: RouteComponent,
@@ -175,7 +174,7 @@ function RouteComponent() {
             Your Items ({items.length + platters.length})
           </div>
         </div>
-        {[...items, ...platters].map((item) => {
+        {[...items, ...platters].map((item: any) => {
 
           let productDetails;
           if (item.itemType === 'subs') {
