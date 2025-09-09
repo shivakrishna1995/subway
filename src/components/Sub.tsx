@@ -111,7 +111,7 @@ const Sub = ({ productName, price, description, imageUrl }: ProductProps) => {
                     reset();
                     setOpenDialog(false);
                 })}>
-                    <div className="flex flex-col flex-1 overflow-y-auto">
+                    <div className="flex flex-col flex-1 overflow-y-auto gap-5">
                         <div className="flex flex-col gap-6">
                             <img src={imageUrl} alt={productName} className='w-full object-contain border-[1px] h-[200px] border-solid border-[#E5E7EB] rounded-lg' />
                         </div>
@@ -497,7 +497,7 @@ const Sub = ({ productName, price, description, imageUrl }: ProductProps) => {
                         </div>
                     </div>
 
-                    <div className="flex flex-col border-t-[1px] border-solid border-[#E5E7EB] py-2 gap-7">
+                    <div className="flex flex-col border-t-[1px] border-solid border-[#E5E7EB] py-4 gap-4">
                         <div className="flex gap-10 items-center justify-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 24 24" fill="none" className="cursor-pointer"
                                 onClick={() => {
