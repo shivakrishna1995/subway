@@ -113,7 +113,7 @@
                 },
                 {
                     "name": "Jack Potato",
-                    "price": 0
+                    "price": 1.00
                 }
             ],
             "breads": [
@@ -293,7 +293,7 @@
             "mealDeal": [
                 {
                     "name": "Yes",
-                    "price": 0
+                    "price": 2.50
                 },
                 {
                     "name": "No",
@@ -303,137 +303,109 @@
             "sides": [
                 {
                     "name": "Double Chocolate Cookie (Ve)",
-                    "price": 1
+                    "price": 0
                 },
                 {
                     "name": "Chocolate Chunk Cookie",
-                    "price": 1
+                    "price": 0
                 },
                 {
                     "name": "Rainbow Chocolate Chip Cookie",
-                    "price": 1
+                    "price": 0
                 },
                 {
                     "name": "White Chip Macadamia Nut Cookie",
-                    "price": 1
-                },
-                {
-                    "name": "3x Double Chocolate Cookies (Ve)",
-                    "price": 2.50
-                },
-                {
-                    "name": "3x Chocolate Chunk Cookies",
-                    "price": 2.50
-                },
-                {
-                    "name": "3x Rainbow Chocolate Chip Cookies",
-                    "price": 2.50
-                },
-                {
-                    "name": "3x White Chocolate Chip Macadamia Nut Cookies",
-                    "price": 2.50
-                },
-                {
-                    "name": "12 Cookies",
-                    "price": 8.50
+                    "price": 0
                 },
                 {
                     "name": "DORITOS® Chilli Heatwave",
-                    "price": 1
+                    "price": 0
                 },
                 {
                     "name": "DORITOS® Tangy Cheese",
-                    "price": 1
+                    "price": 0
                 },
                 {
                     "name": "Quavers Cheese",
-                    "price": 1
+                    "price": 0
                 },
                 {
                     "name": "Walkers Cheese & Onion",
-                    "price": 1
+                    "price": 0
                 },
                 {
                     "name": "Walkers Max Paprika",
-                    "price": 1
+                    "price": 0
                 },
                 {
                     "name": "Walkers Oven Baked Cheese & Onion",
-                    "price": 1
+                    "price": 0
                 },
                 {
                     "name": "Walkers Ready Salted",
-                    "price": 1
+                    "price": 0
                 },
                 {
                     "name": "Walkers Salt & Vinegar",
-                    "price": 1
+                    "price": 0
                 }
             ],
             "drinks": [
                 {
                     "name": "Coca-Cola Original 500ml",
-                    "price": 2.29
+                    "price": 0
                 },
                 {
                     "name": "Coca-Cola Zero 500ml",
-                    "price": 2.29
+                    "price": 0
                 },
                 {
                     "name": "Coca-Cola Zero Cherry 500ml",
-                    "price": 2.29
-                },
-                {
-                    "name": "Coke Zero 1.25L",
-                    "price": 2.29
+                    "price": 0
                 },
                 {
                     "name": "Costa Caramel Latte 250ml",
-                    "price": 2.29
+                    "price": 0
                 },
                 {
                     "name": "Costa Latte 250ml",
-                    "price": 2.29
+                    "price": 0
                 },
                 {
                     "name": "Costa Brownie Frappe 250ml",
-                    "price": 2.29
+                    "price": 0
                 },
                 {
                     "name": "Dr Pepper 500ml",
-                    "price": 2.29
-                },
-                {
-                    "name": "Fanta Orange 1.25L",
-                    "price": 2.29
+                    "price": 0
                 },
                 {
                     "name": "Fanta Orange 500ml",
-                    "price": 2.29
+                    "price": 0
                 },
                 {
                     "name": "Oasis Summer Fruits 500ml",
-                    "price": 2.29
+                    "price": 0
                 },
                 {
                     "name": "Powerade Berry Tropical 500ml",
-                    "price": 2.29
+                    "price": 0
                 },
                 {
                     "name": "Princes Gate Still Water 500ml",
-                    "price": 2.29
+                    "price": 0
                 },
                 {
                     "name": "Robinsons Fruit Shoot Apple & Blackcurrent 200ml",
-                    "price": 2.29
+                    "price": 0
                 },
                 {
                     "name": "Sprite Zero 500ml",
-                    "price": 2.29
+                    "price": 0
                 },
                 {
                     "name": "Tropicana Orange Juice 250ml",
-                    "price": 2.29
+                    "price": 0
                 }
             ]
         }

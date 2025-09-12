@@ -31,8 +31,6 @@ const Sub = ({ productName, price, description, imageUrl }: ProductProps) => {
             productName,
             salad: [],
             sauces: [],
-            sides: [],
-            drinks: [],
         }
     });
     const [qty, setQty] = useState(1);
@@ -406,7 +404,9 @@ const Sub = ({ productName, price, description, imageUrl }: ProductProps) => {
                                                                 />
                                                                 <div className="text-[#222222]">{option.name}</div>
                                                             </div>
-                                                            <div className="font-medium text-[#222222] text-sm"></div>
+                                                            {option.price > 0 && (
+                                                                <div className="font-medium text-[#222222] text-sm">£{option.price.toFixed(2)}</div>
+                                                            )}
                                                         </div>
                                                     </div>
                                                 ))}
@@ -430,15 +430,10 @@ const Sub = ({ productName, price, description, imageUrl }: ProductProps) => {
                                                 </div>
                                                 {Data.subs.order.sides.map((option) => (
                                                     <div className="flex flex-col gap-1 cursor-pointer"
-                                                        onClick={() => {
-                                                            if (value?.includes(option.name as "Double Chocolate Cookie (Ve)" | "Chocolate Chunk Cookie" | "Rainbow Chocolate Chip Cookie" | "White Chip Macadamia Nut Cookie" | "3x Double Chocolate Cookies (Ve)" | "3x Chocolate Chunk Cookies" | "3x Rainbow Chocolate Chip Cookies" | "3x White Chocolate Chip Macadamia Nut Cookies" | "12 Cookies" | "DORITOS® Chilli Heatwave" | "DORITOS® Tangy Cheese" | "Quavers Cheese" | "Walkers Cheese & Onion" | "Walkers Max Paprika" | "Walkers Oven Baked Cheese & Onion" | "Walkers Ready Salted" | "Walkers Salt & Vinegar")) {
-                                                                return onChange(value.filter((item) => item !== option.name))
-                                                            }
-                                                            return onChange([...(value || []), option.name])
-                                                        }}>
+                                                        onClick={() => onChange(option.name)}>
                                                         <div className="flex flex-row items-center justify-between">
                                                             <div className="flex items-center gap-3">
-                                                                <input type='checkbox' className="w-5 h-5"
+                                                                <input type='radio' name="sides" className="w-5 h-5"
                                                                     checked={value?.includes(option.name as "Double Chocolate Cookie (Ve)" | "Chocolate Chunk Cookie" | "Rainbow Chocolate Chip Cookie" | "White Chip Macadamia Nut Cookie" | "3x Double Chocolate Cookies (Ve)" | "3x Chocolate Chunk Cookies" | "3x Rainbow Chocolate Chip Cookies" | "3x White Chocolate Chip Macadamia Nut Cookies" | "12 Cookies" | "DORITOS® Chilli Heatwave" | "DORITOS® Tangy Cheese" | "Quavers Cheese" | "Walkers Cheese & Onion" | "Walkers Max Paprika" | "Walkers Oven Baked Cheese & Onion" | "Walkers Ready Salted" | "Walkers Salt & Vinegar")}
                                                                     readOnly
                                                                 />
@@ -470,15 +465,10 @@ const Sub = ({ productName, price, description, imageUrl }: ProductProps) => {
                                                 </div>
                                                 {Data.subs.order.drinks.map((option) => (
                                                     <div className="flex flex-col gap-1 cursor-pointer"
-                                                        onClick={() => {
-                                                            if (value?.includes(option.name as 'Coca-Cola Original 500ml' | 'Coca-Cola Zero 500ml' | 'Coca-Cola Zero Cherry 500ml' | 'Coke Zero 1.25L' | 'Costa Caramel Latte 250ml' | 'Costa Latte 250ml' | 'Costa Brownie Frappe 250ml' | 'Dr Pepper 500ml' | 'Fanta Orange 1.25L' | 'Fanta Orange 500ml' | 'Oasis Summer Fruits 500ml' | 'Powerade Berry Tropical 500ml' | 'Princes Gate Still Water 500ml' | 'Robinsons Fruit Shoot Apple & Blackcurrent 200ml' | 'Sprite Zero 500ml' | 'Tropicana Orange Juice 250ml')) {
-                                                                return onChange(value.filter((item) => item !== option.name))
-                                                            }
-                                                            return onChange([...(value || []), option.name])
-                                                        }}>
+                                                        onClick={() => onChange(option.name)}>
                                                         <div className="flex flex-row items-center justify-between">
                                                             <div className="flex items-center gap-3">
-                                                                <input type='checkbox' className="w-5 h-5"
+                                                                <input type='radio' name="drinks" className="w-5 h-5"
                                                                     checked={value?.includes(option.name as 'Coca-Cola Original 500ml' | 'Coca-Cola Zero 500ml' | 'Coca-Cola Zero Cherry 500ml' | 'Coke Zero 1.25L' | 'Costa Caramel Latte 250ml' | 'Costa Latte 250ml' | 'Costa Brownie Frappe 250ml' | 'Dr Pepper 500ml' | 'Fanta Orange 1.25L' | 'Fanta Orange 500ml' | 'Oasis Summer Fruits 500ml' | 'Powerade Berry Tropical 500ml' | 'Princes Gate Still Water 500ml' | 'Robinsons Fruit Shoot Apple & Blackcurrent 200ml' | 'Sprite Zero 500ml' | 'Tropicana Orange Juice 250ml')}
                                                                     readOnly
                                                                 />
