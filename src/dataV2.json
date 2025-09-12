@@ -112,7 +112,7 @@
                     "price": 1.20
                 },
                 {
-                    "name": "Jack Potato",
+                    "name": "Jacket Potato",
                     "price": 1.00
                 }
             ],
@@ -263,10 +263,6 @@
                 },
                 {
                     "name": "Ketchup (VE)",
-                    "price": 0
-                },
-                {
-                    "name": "HP Brown Sauce (VE)",
                     "price": 0
                 },
                 {
