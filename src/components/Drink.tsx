@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 import { toast } from "react-toastify";
+import { useCartStore } from "@/store/cart";
 
 type ProductProps = {
     productName: string;
@@ -12,6 +13,8 @@ const Drink = ({ productName, price, description, imageUrl }: ProductProps) => {
     const [openDialog, setOpenDialog] = useState(false);
 
     const [qty, setQty] = useState(1);
+
+    const { addDrink } = useCartStore();
 
     return (
         <Dialog open={openDialog} onOpenChange={setOpenDialog}>
@@ -72,6 +75,14 @@ const Drink = ({ productName, price, description, imageUrl }: ProductProps) => {
                     <button
                         className='bg-[#007C3E] disabled:bg-[#007c3e8c] h-[48px] p-3 rounded-lg flex justify-center items-center text-white font-medium cursor-pointer hover:bg-[#00934a]'
                         onClick={() => {
+                            addDrink({
+                                item: {
+                                    productName,
+                                },
+                                itemType: 'drinks',
+                                qty,
+                                id: Date.now(),
+                            });
                             toast.success("Added to cart");
                             setOpenDialog(false);
                         }}
