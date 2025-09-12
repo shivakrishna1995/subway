@@ -271,7 +271,7 @@ const Sub = ({ productName, price, description, imageUrl }: ProductProps) => {
                                     )}
                                 />
                             )}
-                            {['6-inch', 'Footlong', 'Wrap', 'Jack Potato'].includes(watch('type')) && (
+                            {['6-inch', 'Footlong', 'Wrap'].includes(watch('type')) && (
                                 <Controller
                                     control={control}
                                     name='toasted'

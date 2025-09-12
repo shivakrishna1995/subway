@@ -7,7 +7,7 @@ export default z.object({
     cheese: z.enum(["Yes", "No"]),
     doubleCheese: z.enum(["Yes", "No"]).optional(),
     doubleMeat: z.enum(["Yes", "No"]),
-    toasted: z.enum(["Yes", "No"]),
+    toasted: z.enum(["Yes", "No"]).optional(),
     salad: z.array(z.enum(["Lettuce", "Tomatoes", "Cucumber", "Pickles", "Peppers", "Olives", "Red Onions", "Jalapenos", "Sweetcorn"])),
     sauces: z.array(z.enum(["Sweet Chilli Sauce", "Chipotle Southwest Sauce (V)", "Sweet Onion (VE)", "Honey Mustard Dressing", "Ketchup (VE)", "HP Brown Sauce (VE)", "X-Spicy Chipotle Southwest Sauce (V)", "Garlic & Herb Sauce (VE)", "Teriyaki Sauce (VE)", "Lite Mayo", "BBQ Sauce"]))
         .max(2, "You can only choose up to 2 sauces"),
@@ -21,7 +21,15 @@ export default z.object({
         'Costa Latte 250ml', 'Costa Brownie Frappe 250ml', 'Dr Pepper 500ml', 'Fanta Orange 1.25L', 'Fanta Orange 500ml', 'Oasis Summer Fruits 500ml',
         'Powerade Berry Tropical 500ml', 'Princes Gate Still Water 500ml', 'Robinsons Fruit Shoot Apple & Blackcurrent 200ml', 'Sprite Zero 500ml', 'Tropicana Orange Juice 250ml',
     ]).optional(),
-}).superRefine(({ type, bread, cheese, doubleCheese, mealDeal, side, drink }, ctx) => {
+}).superRefine(({ type, toasted, bread, cheese, doubleCheese, mealDeal, side, drink }, ctx) => {
+    if (!toasted && ["6-inch", "Footlong", "Wrap"].includes(type)) {
+        ctx.addIssue({
+            code: "custom",
+            message: "You must choose toasted",
+            path: ["toasted"],
+        });
+    }
+
     if (!bread && ["6-inch", "Footlong"].includes(type)) {
         ctx.addIssue({
             code: "custom",
