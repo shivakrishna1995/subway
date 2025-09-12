@@ -82,7 +82,7 @@ const Platter = ({ productName, price, description, imageUrl }: ProductProps) =>
                                 itemType: 'platters',
                                 qty,
                                 id: Date.now(),
-                            })
+                            });
                             toast.success("Added to cart");
                             setOpenDialog(false);
                         }}
