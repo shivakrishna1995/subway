@@ -26,7 +26,7 @@ function RouteComponent() {
 
   const [deliveryMethod, setDeliveryMethod] = useState<string | undefined>();
 
-  const { items, removeItem, updateQty, clear, platters, removePlatter, updatePlatterQty, } = useCartStore();
+  const { items, removeItem, updateQty, clear, platters, removePlatter, updatePlatterQty, sides, removeSide, updateSideQty, drinks, removeDrink, updateDrinkQty } = useCartStore();
 
   const [order, setOrder] = useState({
     name: '',
@@ -100,7 +100,21 @@ function RouteComponent() {
         "image_url": Data.platters.products.find(p => p.productName === platter.item.productName)?.imageUrl || "",
         "units": platter.qty,
         "price": prices[platter.id],
-      }))),
+      })))
+        .concat(sides.map(side => ({
+          "name": side.item.productName,
+          "description": Data.sides.products.find(p => p.productName === side.item.productName)?.description || "",
+          "image_url": Data.sides.products.find(p => p.productName === side.item.productName)?.imageUrl || "",
+          "units": side.qty,
+          "price": prices[side.id],
+        })))
+        .concat(drinks.map(drink => ({
+          "name": drink.item.productName,
+          "description": Data.drinks.products.find(p => p.productName === drink.item.productName)?.description || "",
+          "image_url": Data.drinks.products.find(p => p.productName === drink.item.productName)?.imageUrl || "",
+          "units": drink.qty,
+          "price": prices[drink.id],
+        }))),
       "cost": {
         "shipping": 0.00,
         "tax": 0.00,
@@ -130,7 +144,7 @@ function RouteComponent() {
     }
   };
 
-  if (items.length === 0 && platters.length === 0) return <div className='my-10 md:my-16'>
+  if (items.length === 0 && platters.length === 0 && sides.length === 0 && drinks.length === 0) return <div className='my-10 md:my-16'>
     <div className='container mx-auto p-4 flex flex-col gap-16'>
       <div className='max-w-[669px] self-center flex flex-col items-center gap-4'>
         <span className='font-bold text-4xl text-[#111827] text-center'>
@@ -171,16 +185,20 @@ function RouteComponent() {
       <div className='flex-1 bg-white p-6 flex flex-col gap-10'>
         <div className='flex justify-between items-center'>
           <div className='text-[#111827] font-semibold text-xl'>
-            Your Items ({items.length + platters.length})
+            Your Items ({items.length + platters.length + sides.length + drinks.length})
           </div>
         </div>
-        {[...items, ...platters].map((item: any) => {
+        {[...items, ...platters, ...sides, ...drinks].map((item: any) => {
 
           let productDetails;
           if (item.itemType === 'subs') {
             productDetails = Data.subs.products.find(p => p.productName === item.item.productName);
-          } else {
+          } else if (item.itemType === 'platters') {
             productDetails = Data.platters.products.find(p => p.productName === item.item.productName);
+          } else if (item.itemType === 'sides') {
+            productDetails = Data.sides.products.find(p => p.productName === item.item.productName);
+          } else if (item.itemType === 'drinks') {
+            productDetails = Data.drinks.products.find(p => p.productName === item.item.productName);
           }
 
           return (
@@ -227,10 +245,24 @@ function RouteComponent() {
                           }
                           return removeItem(item.id);
                         }
-                        if (item.qty > 1) {
-                          return updatePlatterQty(item.id, item.qty - 1);
+                        if (item.itemType === 'platters') {
+                          if (item.qty > 1) {
+                            return updatePlatterQty(item.id, item.qty - 1);
+                          }
+                          return removePlatter(item.id);
                         }
-                        return removePlatter(item.id);
+                        if (item.itemType === 'sides') {
+                          if (item.qty > 1) {
+                            return updateSideQty(item.id, item.qty - 1);
+                          }
+                          return removeSide(item.id);
+                        }
+                        if (item.itemType === 'drinks') {
+                          if (item.qty > 1) {
+                            return updateDrinkQty(item.id, item.qty - 1);
+                          }
+                          return removeDrink(item.id);
+                        }
                       }}
                     >
                       <path fill-rule="evenodd" clip-rule="evenodd" d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM15.75 12C15.75 12.4142 15.4142 12.75 15 12.75H9C8.58579 12.75 8.25 12.4142 8.25 12C8.25 11.5858 8.58579 11.25 9 11.25H15C15.4142 11.25 15.75 11.5858 15.75 12Z" fill="#1C274C" />
@@ -243,7 +275,15 @@ function RouteComponent() {
                         if (item.itemType === 'subs') {
                           return updateQty(item.id, item.qty + 1);
                         }
-                        return updatePlatterQty(item.id, item.qty + 1);
+                        if (item.itemType === 'platters') {
+                          return updatePlatterQty(item.id, item.qty + 1);
+                        }
+                        if (item.itemType === 'sides') {
+                          return updateSideQty(item.id, item.qty + 1);
+                        }
+                        if (item.itemType === 'drinks') {
+                          return updateDrinkQty(item.id, item.qty + 1);
+                        }
                       }}
                     >
                       <path fill-rule="evenodd" clip-rule="evenodd" d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22ZM12.75 9C12.75 8.58579 12.4142 8.25 12 8.25C11.5858 8.25 11.25 8.58579 11.25 9L11.25 11.25H9C8.58579 11.25 8.25 11.5858 8.25 12C8.25 12.4142 8.58579 12.75 9 12.75H11.25V15C11.25 15.4142 11.5858 15.75 12 15.75C12.4142 15.75 12.75 15.4142 12.75 15L12.75 12.75H15C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25H12.75V9Z" fill="#1C274C" />
@@ -264,7 +304,15 @@ function RouteComponent() {
                       if (item.itemType === 'subs') {
                         return removeItem(item.id);
                       }
-                      return removePlatter(item.id);
+                      if (item.itemType === 'platters') {
+                        return removePlatter(item.id);
+                      }
+                      if (item.itemType === 'sides') {
+                        return removeSide(item.id);
+                      }
+                      if (item.itemType === 'drinks') {
+                        return removeDrink(item.id);
+                      }
                     }}>
                       Remove
                     </div>

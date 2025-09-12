@@ -32,5 +32,19 @@ export const getCartPrices = () => {
         prices[platter.id] = platterPrice * platter.qty;
     }
 
+    const sides = useCartStore.getState().sides;
+
+    for (const side of sides) {
+        const sidePrice = Data.sides.products.find(product => product.productName === side.item.productName)?.price || 0;
+        prices[side.id] = sidePrice * side.qty;
+    }
+
+    const drinks = useCartStore.getState().drinks;
+
+    for (const drink of drinks) {
+        const drinkPrice = Data.drinks.products.find(product => product.productName === drink.item.productName)?.price || 0;
+        prices[drink.id] = drinkPrice * drink.qty;
+    }
+
     return prices;
 }
