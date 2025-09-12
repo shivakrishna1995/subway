@@ -476,5 +476,293 @@
                 "price": 29.00
             }
         ]
+    },
+    "sides": {
+        "products": [
+            {
+                "productId": 1,
+                "productName": "Walkers cheese & Onion",
+                "description": "",
+                "imageUrl": "https://media.amp.subway.com/adaptivemedia/rendition?id=bd583712a831570e80acdd4c8028d1c9fc2729c4&clid=srow&prid=SubCropBgd&wd=430&grv=Center&hofs=0&vofs=0&cwd=8000&cht=8000&op=png&bwd=454&bht=342",
+                "price": 1.00
+            },
+            {
+                "productId": 2,
+                "productName": "Walkers Ready Salted",
+                "description": "",
+                "imageUrl": "https://media.amp.subway.com/adaptivemedia/rendition?id=72e9cd94a969618f8225cd01ccd2bad0a0dcd429&clid=srow&prid=SubCropBgd&wd=430&grv=Center&hofs=0&vofs=0&cwd=8000&cht=8000&op=png&bwd=454&bht=342",
+                "price": 1.00
+            },
+            {
+                "productId": 3,
+                "productName": "Walkers Salt & Vinegar",
+                "description": "",
+                "imageUrl": "https://media.amp.subway.com/adaptivemedia/rendition?id=5eee4c48754afdcd4c46a4b07802aea9a447d0c8&clid=srow&prid=SubCropBgd&wd=430&grv=Center&hofs=0&vofs=0&cwd=8000&cht=8000&op=png&bwd=454&bht=342",
+                "price": 1.00
+            },
+            {
+                "productId": 4,
+                "productName": "Quavers Cheese",
+                "description": "",
+                "imageUrl": "https://media.amp.subway.com/adaptivemedia/rendition?id=40f712b5c199f8a6874976d8e725a6e4687dacf6&clid=srow&prid=SubCropBgd&wd=430&grv=Center&hofs=0&vofs=0&cwd=8000&cht=8000&op=png&bwd=454&bht=342",
+                "price": 1.00
+            },
+            {
+                "productId": 5,
+                "productName": "Doritos Tangy",
+                "description": "",
+                "imageUrl": "https://media.amp.subway.com/adaptivemedia/rendition?id=231bf0f6117c58dd64aa74efaee67d7fe08b376a&clid=srow&prid=SubCropBgd&wd=430&grv=Center&hofs=0&vofs=0&cwd=8000&cht=8000&op=png&bwd=454&bht=342",
+                "price": 1.00
+            },
+            {
+                "productId": 6,
+                "productName": "Doritos Chilli Heatwave",
+                "description": "",
+                "imageUrl": "https://media.amp.subway.com/adaptivemedia/rendition?id=82ea654595b5eedb939c657092b2c77a956fee84&clid=srow&prid=SubCropBgd&wd=430&grv=Center&hofs=0&vofs=0&cwd=8000&cht=8000&op=png&bwd=454&bht=342",
+                "price": 1.00
+            },
+            {
+                "productId": 7,
+                "productName": "Doritos Cool Original",
+                "description": "",
+                "imageUrl": "https://media.amp.subway.com/adaptivemedia/rendition?id=ba570ba96459e9ed47922c277dd2e31fa1d67855&clid=srow&prid=SubCropBgd&wd=430&grv=Center&hofs=0&vofs=0&cwd=8000&cht=8000&op=png&bwd=454&bht=342",
+                "price": 1.00
+            },
+            {
+                "productId": 8,
+                "productName": "Double Chocolate - Vegan",
+                "description": "",
+                "imageUrl": "https://media.amp.subway.com/adaptivemedia/rendition?id=446451ad3d19bcc2c14f35149bd4dc96a9397a5a&clid=srow&prid=SubCropBgd&wd=430&grv=Center&hofs=0&vofs=0&cwd=8000&cht=8000&op=png&bwd=454&bht=342",
+                "price": 1.00
+            },
+            {
+                "productId": 9,
+                "productName": "Chocolate Chunk Cookie",
+                "description": "",
+                "imageUrl": "https://media.amp.subway.com/adaptivemedia/rendition?id=a057d554151d2926b42e44b0a104c1d5eb64cd0f&clid=srow&prid=SubCropBgd&wd=430&grv=Center&hofs=0&vofs=0&cwd=8000&cht=8000&op=png&bwd=454&bht=342",
+                "price": 1.00
+            },
+            {
+                "productId": 10,
+                "productName": "Whitechip Macademia Nut Chunk",
+                "description": "",
+                "imageUrl": "https://media.amp.subway.com/adaptivemedia/rendition?id=1f39d8e937183d15f733c76a8f0d577b7305a413&clid=srow&prid=SubCropBgd&wd=430&grv=Center&hofs=0&vofs=0&cwd=8000&cht=8000&op=png&bwd=454&bht=342",
+                "price": 1.00
+            },
+            {
+                "productId": 11,
+                "productName": "Rainbow Chocolate chip Cookie",
+                "description": "",
+                "imageUrl": "https://media.amp.subway.com/adaptivemedia/rendition?id=22a3c1cea6bf29c14c7c0df83dc936632e45a084&clid=srow&prid=SubCropBgd&wd=430&grv=Center&hofs=0&vofs=0&cwd=8000&cht=8000&op=png&bwd=454&bht=342",
+                "price": 1.00
+            },
+            {
+                "productId": 12,
+                "productName": "3x Double Chocolate - Vegan",
+                "description": "",
+                "imageUrl": "https://media.amp.subway.com/adaptivemedia/rendition?id=be460e55b96ccf022d4231e7f98a661cb9d7ad08&clid=srow&prid=SubCropBgd&wd=430&grv=Center&hofs=0&vofs=0&cwd=8000&cht=8000&op=png&bwd=454&bht=342",
+                "price": 2.50
+            },
+            {
+                "productId": 13,
+                "productName": "3x Chocolate Chunk Cookie",
+                "description": "",
+                "imageUrl": "https://media.amp.subway.com/adaptivemedia/rendition?id=72bca8ecc3fab923c26570e014657f2310152475&clid=srow&prid=SubCropBgd&wd=430&grv=Center&hofs=0&vofs=0&cwd=8000&cht=8000&op=png&bwd=454&bht=342",
+                "price": 2.50
+            },
+            {
+                "productId": 14,
+                "productName": "3x Whitechip Macademia Nut Chunk",
+                "description": "",
+                "imageUrl": "https://media.amp.subway.com/adaptivemedia/rendition?id=1f39d8e937183d15f733c76a8f0d577b7305a413&clid=srow&prid=SubCropBgd&wd=430&grv=Center&hofs=0&vofs=0&cwd=8000&cht=8000&op=png&bwd=454&bht=342",
+                "price": 2.50
+            },
+            {
+                "productId": 15,
+                "productName": "3x Rainbow Chocolate chip Cookie",
+                "description": "",
+                "imageUrl": "https://media.amp.subway.com/adaptivemedia/rendition?id=f3f8a56533c1e9bef289670c617f303d0525ead7&clid=srow&prid=SubCropBgd&wd=430&grv=Center&hofs=0&vofs=0&cwd=8000&cht=8000&op=png&bwd=454&bht=342",
+                "price": 2.50
+            },
+            {
+                "productId": 16,
+                "productName": "12x Double Chocolate - Vegan",
+                "description": "",
+                "imageUrl": "https://media.amp.subway.com/adaptivemedia/rendition?id=446451ad3d19bcc2c14f35149bd4dc96a9397a5a&clid=srow&prid=SubCropBgd&wd=430&grv=Center&hofs=0&vofs=0&cwd=8000&cht=8000&op=png&bwd=454&bht=342",
+                "price": 8.50
+            },
+            {
+                "productId": 17,
+                "productName": "12x Chocolate Chunk Cookie",
+                "description": "",
+                "imageUrl": "https://media.amp.subway.com/adaptivemedia/rendition?id=a057d554151d2926b42e44b0a104c1d5eb64cd0f&clid=srow&prid=SubCropBgd&wd=430&grv=Center&hofs=0&vofs=0&cwd=8000&cht=8000&op=png&bwd=454&bht=342",
+                "price": 8.50
+            },
+            {
+                "productId": 18,
+                "productName": "12x Whitechip Macademia Nut Chunk",
+                "description": "",
+                "imageUrl": "https://media.amp.subway.com/adaptivemedia/rendition?id=1f39d8e937183d15f733c76a8f0d577b7305a413&clid=srow&prid=SubCropBgd&wd=430&grv=Center&hofs=0&vofs=0&cwd=8000&cht=8000&op=png&bwd=454&bht=342",
+                "price": 8.50
+            },
+            {
+                "productId": 19,
+                "productName": "12x Rainbow Chocolate chip Cookie",
+                "description": "",
+                "imageUrl": "https://media.amp.subway.com/adaptivemedia/rendition?id=22a3c1cea6bf29c14c7c0df83dc936632e45a084&clid=srow&prid=SubCropBgd&wd=430&grv=Center&hofs=0&vofs=0&cwd=8000&cht=8000&op=png&bwd=454&bht=342",
+                "price": 8.50
+            },
+            {
+                "productId": 20,
+                "productName": "Doritos Nachos",
+                "description": "",
+                "imageUrl": "https://media.amp.subway.com/adaptivemedia/rendition?id=04e7062acee2059b09486e5f952408358af3224c&clid=srow&prid=SubCropBgd&wd=430&grv=Center&hofs=0&vofs=0&cwd=8000&cht=8000&op=png&bwd=454&bht=342",
+                "price": 3.99
+            },
+            {
+                "productId": 21,
+                "productName": "6 Hash browns",
+                "description": "",
+                "imageUrl": "https://media.amp.subway.com/adaptivemedia/rendition?id=0bdffe5a68f9419d3caae39f286b07d80b7ae895&clid=srow&prid=SubCropBgd&wd=430&grv=Center&hofs=0&vofs=0&cwd=8000&cht=8000&op=png&bwd=454&bht=342",
+                "price": 2.99
+            },
+            {
+                "productId": 22,
+                "productName": "9 hash browns",
+                "description": "",
+                "imageUrl": "https://media.amp.subway.com/adaptivemedia/rendition?id=1c1101cf8487c225cd87da6ea0233b0bddfb29e5&clid=srow&prid=SubCropBgd&wd=430&grv=Center&hofs=0&vofs=0&cwd=8000&cht=8000&op=png&bwd=454&bht=342",
+                "price": 3.99
+            },
+            {
+                "productId": 23,
+                "productName": "Margherita slice",
+                "description": "",
+                "imageUrl": "https://media.amp.subway.com/adaptivemedia/rendition?id=f45924b461846ae1d31cd05462d1d9432f8ac1ee&clid=srow&prid=SubCropBgd&wd=430&grv=Center&hofs=0&vofs=0&cwd=8000&cht=8000&op=png&bwd=454&bht=342",
+                "price": 3.49
+            },
+            {
+                "productId": 24,
+                "productName": "Pepperoni slice",
+                "description": "",
+                "imageUrl": "https://media.amp.subway.com/adaptivemedia/rendition?id=e206c5431b5001e63d6099bf55375a13d622a5d2&clid=srow&prid=SubCropBgd&wd=430&grv=Center&hofs=0&vofs=0&cwd=8000&cht=8000&op=png&bwd=454&bht=342",
+                "price": 3.49
+            },
+            {
+                "productId": 25,
+                "productName": "Garlic slice",
+                "description": "",
+                "imageUrl": "https://media.amp.subway.com/adaptivemedia/rendition?id=fa25e29b5961c0f5c5d2ec1b548591f2e62dee9f&clid=srow&prid=SubCropBgd&wd=430&grv=Center&hofs=0&vofs=0&cwd=8000&cht=8000&op=png&bwd=454&bht=342",
+                "price": 3.49
+            },
+            {
+                "productId": 26,
+                "productName": "Meatballs",
+                "description": "",
+                "imageUrl": "https://media.amp.subway.com/adaptivemedia/rendition?id=f7c5a21e731140f95acd3c7db7dec5028c6f5923&clid=srow&prid=SubCropBgd&wd=430&grv=Center&hofs=0&vofs=0&cwd=8000&cht=8000&op=png&bwd=454&bht=342",
+                "price": 2.99
+            }
+        ]
+    },
+    "drinks": {
+        "products": [
+            {
+                "productId": 20,
+                "productName": "Tropicana Orange Juice 250ml",
+                "description": "",
+                "imageUrl": "https://media.amp.subway.com/adaptivemedia/rendition?id=159f03a324a19e91ab02aae7465ecbc79bbd579a&clid=srow&prid=SubCropBgd&wd=430&grv=Center&hofs=0&vofs=0&cwd=8000&cht=8000&op=png&bwd=454&bht=342",
+                "price": 2.29
+            },
+            {
+                "productId": 21,
+                "productName": "Princess gate Water 500ml",
+                "description": "",
+                "imageUrl": "https://media.amp.subway.com/adaptivemedia/rendition?id=c50cab622ddce79891d92d67ed2518f89b921a87&clid=srow&prid=SubCropBgd&wd=430&grv=Center&hofs=0&vofs=0&cwd=8000&cht=8000&op=png&bwd=454&bht=342",
+                "price": 2.29
+            },
+            {
+                "productId": 22,
+                "productName": "Costa Caramel Latte 250ml",
+                "description": "",
+                "imageUrl": "https://media.amp.subway.com/adaptivemedia/rendition?id=bdf0602f504dead5df68ba426ede7ac94c60752d&clid=srow&prid=SubCropBgd&wd=430&grv=Center&hofs=0&vofs=0&cwd=8000&cht=8000&op=png&bwd=454&bht=342",
+                "price": 2.29
+            },
+            {
+                "productId": 23,
+                "productName": "Oasis Summer fruits 500ml",
+                "description": "",
+                "imageUrl": "https://media.amp.subway.com/adaptivemedia/rendition?id=653a99f53b1c284dc1e81deb966522f7c301dc00&clid=srow&prid=SubCropBgd&wd=430&grv=Center&hofs=0&vofs=0&cwd=8000&cht=8000&op=png&bwd=454&bht=342",
+                "price": 2.29
+            },
+            {
+                "productId": 24,
+                "productName": "Sprite zero 500ml",
+                "description": "",
+                "imageUrl": "https://media.amp.subway.com/adaptivemedia/rendition?id=0f58e806920ff0da231c73a744eebf0a98998584&clid=srow&prid=SubCropBgd&wd=430&grv=Center&hofs=0&vofs=0&cwd=8000&cht=8000&op=png&bwd=454&bht=342",
+                "price": 2.29
+            },
+            {
+                "productId": 25,
+                "productName": "Dr Pepper 500ml",
+                "description": "",
+                "imageUrl": "https://media.amp.subway.com/adaptivemedia/rendition?id=9ed4023ee97eb3c3aa99c944195d9693ef0a1e99&clid=srow&prid=SubCropBgd&wd=430&grv=Center&hofs=0&vofs=0&cwd=8000&cht=8000&op=png&bwd=454&bht=342",
+                "price": 2.29
+            },
+            {
+                "productId": 26,
+                "productName": "Fanta Orange 500ml",
+                "description": "",
+                "imageUrl": "https://media.amp.subway.com/adaptivemedia/rendition?id=559c76282e197078472e6198341d37f77ac2c655&clid=srow&prid=SubCropBgd&wd=430&grv=Center&hofs=0&vofs=0&cwd=8000&cht=8000&op=png&bwd=454&bht=342",
+                "price": 2.29
+            },
+            {
+                "productId": 27,
+                "productName": "Coca cola Original 500ml",
+                "description": "",
+                "imageUrl": "https://media.amp.subway.com/adaptivemedia/rendition?id=b860983491ef410bbfc30e2369b1510e4b31c5e5&clid=srow&prid=SubCropBgd&wd=430&grv=Center&hofs=0&vofs=0&cwd=8000&cht=8000&op=png&bwd=454&bht=342",
+                "price": 2.29
+            },
+            {
+                "productId": 28,
+                "productName": "Coca cola Zero 500ml",
+                "description": "",
+                "imageUrl": "https://media.amp.subway.com/adaptivemedia/rendition?id=56aa2f28c0078275658e3a5fd9070c3056d864c1&clid=srow&prid=SubCropBgd&wd=430&grv=Center&hofs=0&vofs=0&cwd=8000&cht=8000&op=png&bwd=454&bht=342",
+                "price": 2.29
+            },
+            {
+                "productId": 29,
+                "productName": "Diet Coke 500ml",
+                "description": "",
+                "imageUrl": "https://media.amp.subway.com/adaptivemedia/rendition?id=b24b162a9b7ab942d318e35acd7ddaa0f6b57bc9&clid=srow&prid=SubCropBgd&wd=430&grv=Center&hofs=0&vofs=0&cwd=8000&cht=8000&op=png&bwd=454&bht=342",
+                "price": 2.29
+            },
+            {
+                "productId": 30,
+                "productName": "Coca Cola Zero Cherry 500ml",
+                "description": "",
+                "imageUrl": "https://media.amp.subway.com/adaptivemedia/rendition?id=ca03ffdea348464b4c03cb6f8e6e352e003c11f2&clid=srow&prid=SubCropBgd&wd=430&grv=Center&hofs=0&vofs=0&cwd=8000&cht=8000&op=png&bwd=454&bht=342",
+                "price": 2.29
+            },
+            {
+                "productId": 31,
+                "productName": "Robinsons Fruit Shoot Apple & Blackcurrent 200ml",
+                "description": "",
+                "imageUrl": "/42b10752b5083d5e.png.webp",
+                "price": 2.29
+            },
+            {
+                "productId": 32,
+                "productName": "Coke zero 1.25L",
+                "description": "",
+                "imageUrl": "https://media.amp.subway.com/adaptivemedia/rendition?id=88bbeec1fefb0f182580d444bc4903dc72290e67&clid=srow&prid=SubCropBgd&wd=430&grv=Center&hofs=0&vofs=0&cwd=8000&cht=8000&op=png&bwd=454&bht=342",
+                "price": 3.49
+            },
+            {
+                "productId": 33,
+                "productName": "Fanta 1.25L",
+                "description": "",
+                "imageUrl": "https://media.amp.subway.com/adaptivemedia/rendition?id=e1eaa398a0bb87828fa14bef7e622d623446ae98&clid=srow&prid=SubCropBgd&wd=430&grv=Center&hofs=0&vofs=0&cwd=8000&cht=8000&op=png&bwd=454&bht=342",
+                "price": 3.49
+            }
+        ]
     }
 }
