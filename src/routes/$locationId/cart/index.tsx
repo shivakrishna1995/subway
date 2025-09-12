@@ -81,12 +81,12 @@ function RouteComponent() {
             str += ` | Meal Deal: ${item.item.mealDeal}`;
           }
 
-          if (item.item.sides?.length) {
-            str += ` | Sides: ${item.item.sides?.join(', ')}`;
+          if (item.item.side) {
+            str += ` | Side: ${item.item.side}`;
           }
 
-          if (item.item.drinks?.length) {
-            str += ` | Drinks: ${item.item.drinks?.join(', ')}`;
+          if (item.item.drink) {
+            str += ` | Drinks: ${item.item.drink}`;
           }
 
           return str

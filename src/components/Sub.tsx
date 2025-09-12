@@ -68,10 +68,10 @@ const Sub = ({ productName, price, description, imageUrl }: ProductProps) => {
     }, [cheeseWatch]);
 
     useEffect(() => {
-        resetField("sides");
-        resetField("drinks");
-        clearErrors("sides");
-        clearErrors("drinks");
+        resetField("side");
+        resetField("drink");
+        clearErrors("side");
+        clearErrors("drink");
     }, [mealDealWatch])
 
     return (
@@ -417,7 +417,7 @@ const Sub = ({ productName, price, description, imageUrl }: ProductProps) => {
                             )}
                             {watch('mealDeal') === "Yes" && (
                                 <Controller
-                                    name="sides"
+                                    name="side"
                                     control={control}
                                     render={({ field: { onChange, value, } }) => (
                                         <div className='flex flex-col'>
@@ -434,7 +434,7 @@ const Sub = ({ productName, price, description, imageUrl }: ProductProps) => {
                                                         <div className="flex flex-row items-center justify-between">
                                                             <div className="flex items-center gap-3">
                                                                 <input type='radio' name="sides" className="w-5 h-5"
-                                                                    checked={value?.includes(option.name as "Double Chocolate Cookie (Ve)" | "Chocolate Chunk Cookie" | "Rainbow Chocolate Chip Cookie" | "White Chip Macadamia Nut Cookie" | "3x Double Chocolate Cookies (Ve)" | "3x Chocolate Chunk Cookies" | "3x Rainbow Chocolate Chip Cookies" | "3x White Chocolate Chip Macadamia Nut Cookies" | "12 Cookies" | "DORITOS® Chilli Heatwave" | "DORITOS® Tangy Cheese" | "Quavers Cheese" | "Walkers Cheese & Onion" | "Walkers Max Paprika" | "Walkers Oven Baked Cheese & Onion" | "Walkers Ready Salted" | "Walkers Salt & Vinegar")}
+                                                                    checked={value === option.name}
                                                                     readOnly
                                                                 />
                                                                 <div className="text-[#222222]">{option.name}</div>
@@ -452,7 +452,7 @@ const Sub = ({ productName, price, description, imageUrl }: ProductProps) => {
                             )}
                             {watch('mealDeal') === "Yes" && (
                                 <Controller
-                                    name="drinks"
+                                    name="drink"
                                     control={control}
                                     render={({ field: { onChange, value, } }) => (
                                         <div className='flex flex-col'>
@@ -469,7 +469,7 @@ const Sub = ({ productName, price, description, imageUrl }: ProductProps) => {
                                                         <div className="flex flex-row items-center justify-between">
                                                             <div className="flex items-center gap-3">
                                                                 <input type='radio' name="drinks" className="w-5 h-5"
-                                                                    checked={value?.includes(option.name as 'Coca-Cola Original 500ml' | 'Coca-Cola Zero 500ml' | 'Coca-Cola Zero Cherry 500ml' | 'Coke Zero 1.25L' | 'Costa Caramel Latte 250ml' | 'Costa Latte 250ml' | 'Costa Brownie Frappe 250ml' | 'Dr Pepper 500ml' | 'Fanta Orange 1.25L' | 'Fanta Orange 500ml' | 'Oasis Summer Fruits 500ml' | 'Powerade Berry Tropical 500ml' | 'Princes Gate Still Water 500ml' | 'Robinsons Fruit Shoot Apple & Blackcurrent 200ml' | 'Sprite Zero 500ml' | 'Tropicana Orange Juice 250ml')}
+                                                                    checked={value === option.name}
                                                                     readOnly
                                                                 />
                                                                 <div className="text-[#222222]">{option.name}</div>
