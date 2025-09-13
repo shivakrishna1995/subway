@@ -11,7 +11,7 @@ export const Route = createFileRoute('/$locationId/cart/')({
 })
 
 const Branches = {
-  "coventry": "Coventry",
+  "gallaghar-retail-park": "Gallaghar Retail Park",
   "jewellery-quarter": "Jewellery Quarter",
   "broadway-plaza": "Broadway Plaza",
   "west-orchards": "West Orchards",
@@ -39,6 +39,9 @@ function RouteComponent() {
   const prices = useMemo(() => {
     return getCartPrices();
   }, [items, platters]);
+
+  const subTotal = useMemo(() => Object.values(prices).reduce((total, price) => total + price, 0), [prices]);
+  const total = useMemo(() => subTotal + ((deliveryMethod !== "delivery" || subTotal >= 100) ? 0 : 12.99), [subTotal, deliveryMethod]);
 
   const placeOrder = async () => {
     const templateParams = {
@@ -215,7 +218,7 @@ function RouteComponent() {
                     </div>
                   </div>
                   <div className='text-[#111827] font-semibold'>
-                    ${prices[item.id].toFixed(2)}
+                    £{prices[item.id].toFixed(2)}
                   </div>
                 </div>
                 {item.itemType === 'subs' && (
@@ -331,36 +334,40 @@ function RouteComponent() {
         </div>
       </div>
       <div className='w-full md:w-[390px] p-6 flex flex-col gap-6 bg-white'>
-        {/* <div className='text-[#111827] font-semibold text-xl'>
-          Order Summary
-        </div>
-        <div className='flex flex-col gap-3'>
-          <div className='flex justify-between'>
-            <div className='text-[#4B5563]'>
-              Subtotal
+        {deliveryMethod === 'delivery' && (
+          <div className='flex flex-col gap-3'>
+            <div className='text-[#111827] font-semibold text-xl'>
+              Order Summary
             </div>
-            <div className='text-[#000000] font-medium'>
-              ${Object.values(prices).reduce((total, price) => total + price, 0).toFixed(2)}
+            <div className='flex flex-col gap-3'>
+              <div className='flex justify-between'>
+                <div className='text-[#4B5563]'>
+                  Subtotal
+                </div>
+                <div className='text-[#000000] font-medium'>
+                  £{subTotal.toFixed(2)}
+                </div>
+              </div>
+              <div className='flex justify-between'>
+                <div className='text-[#4B5563]'>
+                  Delivery Charges
+                </div>
+                <div className='text-[#000000] font-medium'>
+                  {subTotal >= 100 ? 'Free' : `£12.99`}
+                </div>
+              </div>
+              <hr className='opacity-10' />
+              <div className='flex justify-between'>
+                <div className='text-[#111827] font-semibold'>
+                  Total
+                </div>
+                <div className='text-[#007C3E] font-semibold'>
+                  £{total.toFixed(2)}
+                </div>
+              </div>
             </div>
           </div>
-          <div className='flex justify-between'>
-            <div className='text-[#4B5563]'>
-              Tax
-            </div>
-            <div className='text-[#000000] font-medium'>
-              $0.00
-            </div>
-          </div>
-          <hr className='opacity-10' />
-          <div className='flex justify-between'>
-            <div className='text-[#111827] font-semibold'>
-              Total
-            </div>
-            <div className='text-[#007C3E] font-semibold'>
-              ${(Object.values(prices).reduce((total, price) => total + price, 0) + 0).toFixed(2)}
-            </div>
-          </div>
-        </div> */}
+        )}
         <div className='flex flex-col gap-3'>
           <div className='text-[#111827] font-semibold'>
             Delivery Method
@@ -393,7 +400,7 @@ function RouteComponent() {
                 Delivery
               </div>
               <div className='text-[#4B5563] text-sm'>
-                25-35 min • $2.99
+                25-35 min • {subTotal >= 100 ? 'Free' : `£12.99`}
               </div>
             </div>
             <svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -406,6 +413,9 @@ function RouteComponent() {
                 </clipPath>
               </defs>
             </svg>
+          </div>
+          <div className='text-xs text-[#4B5563]'>
+            *Free delivery over £100
           </div>
         </div>
         <div className='flex flex-col gap-3'>
@@ -439,7 +449,7 @@ function RouteComponent() {
           {orderPlacing && <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24" fill="none" className='animate-spin'>
             <path d="M20.0001 12C20.0001 13.3811 19.6425 14.7386 18.9623 15.9405C18.282 17.1424 17.3022 18.1477 16.1182 18.8587C14.9341 19.5696 13.5862 19.9619 12.2056 19.9974C10.825 20.0328 9.45873 19.7103 8.23975 19.0612" stroke="white" stroke-width="3.55556" stroke-linecap="round" />
           </svg>}
-          Place Order - ${Object.values(prices).reduce((total, price) => total + price, 0).toFixed(2)}
+          Place Order - £{total.toFixed(2)}
           <div></div>
         </button>
         <div className='bg-[#F9FAFB] rounded-lg p-3 text-sm text-[#4B5563]'>
