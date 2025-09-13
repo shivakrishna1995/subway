@@ -8,7 +8,7 @@ export default z.object({
     doubleCheese: z.enum(["Yes", "No"]).optional(),
     doubleMeat: z.enum(["Yes", "No"]),
     toasted: z.enum(["Yes", "No"]).optional(),
-    salad: z.array(z.enum(["Lettuce", "Tomatoes", "Cucumber", "Pickles", "Peppers", "Olives", "Red Onions", "Jalapenos", "Sweetcorn"])),
+    salad: z.array(z.enum(["Lettuce", "Tomatoes", "Cucumber", "Pickles", "Peppers", "Olives", "Red Onions", "Jalapenos", "Sweetcorn", "No Salad"])),
     sauces: z.array(z.enum(["Sweet Chilli Sauce", "Chipotle Southwest Sauce (V)", "Sweet Onion (VE)", "Honey Mustard Dressing", "Ketchup (VE)", "HP Brown Sauce (VE)", "X-Spicy Chipotle Southwest Sauce (V)", "Garlic & Herb Sauce (VE)", "Teriyaki Sauce (VE)", "Lite Mayo", "BBQ Sauce"]))
         .max(2, "You can only choose up to 2 sauces"),
     mealDeal: z.enum(["Yes", "No"]),
