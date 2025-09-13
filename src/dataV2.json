@@ -242,6 +242,10 @@
                 {
                     "name": "Sweetcorn",
                     "price": 0
+                },
+                {
+                    "name": "No Salad",
+                    "price": 0
                 }
             ],
             "sauces": [

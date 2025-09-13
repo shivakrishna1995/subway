@@ -74,6 +74,12 @@ const Sub = ({ productName, price, description, imageUrl }: ProductProps) => {
         clearErrors("drink");
     }, [mealDealWatch])
 
+    useEffect(() => {
+        if (!openDialog) {
+            reset();
+        }
+    }, [openDialog]);
+
     return (
         <Dialog open={openDialog} onOpenChange={setOpenDialog}>
             <DialogTrigger asChild>
@@ -317,7 +323,7 @@ const Sub = ({ productName, price, description, imageUrl }: ProductProps) => {
                                                 {Data.subs.order.salad.map((option) => (
                                                     <div className="flex flex-col gap-1 cursor-pointer"
                                                         onClick={() => {
-                                                            if (value?.includes(option.name as "Lettuce" | "Tomatoes" | "Cucumber" | "Pickles" | "Peppers" | "Olives" | "Red Onions" | "Jalapenos" | "Sweetcorn")) {
+                                                            if (value?.includes(option.name as "Lettuce" | "Tomatoes" | "Cucumber" | "Pickles" | "Peppers" | "Olives" | "Red Onions" | "Jalapenos" | "Sweetcorn" | "No Salad")) {
                                                                 return onChange(value.filter((item) => item !== option.name))
                                                             }
                                                             return onChange([...value, option.name])
@@ -326,7 +332,7 @@ const Sub = ({ productName, price, description, imageUrl }: ProductProps) => {
                                                             <div className="flex items-center gap-3">
                                                                 <input type='checkbox' className="w-5 h-5"
                                                                     readOnly
-                                                                    checked={value?.includes(option.name as "Lettuce" | "Tomatoes" | "Cucumber" | "Pickles" | "Peppers" | "Olives" | "Red Onions" | "Jalapenos" | "Sweetcorn")}
+                                                                    checked={value?.includes(option.name as "Lettuce" | "Tomatoes" | "Cucumber" | "Pickles" | "Peppers" | "Olives" | "Red Onions" | "Jalapenos" | "Sweetcorn" | "No Salad")}
                                                                 />
                                                                 <div className="text-[#222222]">{option.name}</div>
                                                             </div>
